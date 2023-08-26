@@ -1,8 +1,12 @@
 const game_tracker_array = [{},{},{},{}];// Id doesn't need empty games.. It just needs to look that way.
+let global_win_rate = 100;
+let points_bet = 1000;
 
+game_tracker_array[3] = ["Jonathan", 1, 2];
 
+game("Jonathan", 1, 2, "10")
 
-function game (player_id_string, win_loss_bool, crowns_take_int, game_time){
+function game(player_id_string, win_loss_bool, crowns_take_int, game_time){
     let game_result = {
         player_id : player_id_string,
         win_loss : win_loss_bool,
@@ -29,8 +33,7 @@ function bet_analyzer(){
             return false;
         }    
     }
-
-    
+   winning_points_calculator(global_win_rate, points_bet) 
 }
 
 function place_bet(){
@@ -38,16 +41,22 @@ function place_bet(){
 
 }//this will take the imputs from the interface and build a struct based on what they want to bet on.
 
-function winning_points_calculator(win_rate, parlay, points_bet){
+function winning_points_calculator(win_rate, points_bet){
+    let win_rate_multiplier = 0.0;
+    let win_lose = game_tracker_array[2].win_loss ? 1:0;
+    if(win_lose == 1){//They say ox will wins
+        //If oxes win rate is at 0% they should get more points
+        win_rate_multiplier = 2 - win_rate ;
+    } else {//This is if od win rate is 100 and they predict he loses. 
+        win_rate_multiplier = 1 + win_rate;
+    }
 
-
-    let win_rate_multiplier = 0;
     let parlay_multiplier = game_tracker_array[4].lenght();
     let points_bet = points_bet;
 
-    return win_rate_multiplier * points_bet * parlay_multiplier;
+    console.log((win_rate_multiplier * points_bet) * parlay_multiplier);
 }
 
-function win_rate_multiplier_calculation(){
-    
+function winning_points_adder(points){
+
 }
