@@ -3,26 +3,55 @@
     <title>Battle Bets</title>
     <link href="output.css" rel="stylesheet">
 </head>
-<body class="grid columns-2 grid-rows-4 mx-auto bg-slate-300" id="body">
-    <section class="row-span-2 bg-slate-500" id="left">
-        <div class="h-40 w-60 bg-red-900" id="user_info_box">
+<body class="grid columns-2 grid-rows-4 bg-slate-300" id="body">
+    <section class="row-span-2 col-span-1 bg-slate-500" id="left">
+        <div class="bg-red-900" id="user_info_box">
             <div class="" id="player_name">Player Name
                 <input class="" id="player_name_input">
             </div>
             <div class="" id="streamer_id">Streamer ID: <input class="" id="streamer_id_input">
             </div>
-            <section class="inline-block" id="button_menu">
-                <button class="" id="start_button">Start</button>
-                <button class="" id="submit_points">Submit Points</button>
-                <button class="" id="get_more_points">Get more points</button>
+            <section class="inline-block pt-10" id="button_menu">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="start_button">Start</button>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="submit_points">Submit Points</button>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="get_more_points">Get more points</button>
             </section>
         </div>
-        <div class="" id="player_info"></div>
+        <div class="" id="streamer_info">
+            <div class="" id="streamer_name_date">
+                <div class="inline" id="streamer_name">Oxalate</div>
+                <div class="inline" id="current_date">01/01/2023</div>
+            </div>
+            <div class="inline-block pt-10" id="player_stats_group">
+                <div class="inline-block" id="streamer_wins">
+                    <p class="">Wins</p>
+                    <p class="" id="streamer_wins_number">0</p>
+                </div>
+                <div class="inline-block" id="streamer_losses">
+                    <p class="streamer_losses_number">Losses</p>
+                    <p class="" id="streamer_losses_number">0</p>
+                </div>
+                <div class="inline-block" id="streamer_win_percentage">
+                    <p class="">Win Percentage</p>
+                    <p class="" id="streamer_losses_number">0</p>
+                </div>
+            </div>
+
+        </div>
     </section>
-    <section class="" id="right">
+    <section class="col-span-1" id="right">
         <div class="" id="leader_board">
-            <div class="" id="streamer_info"></div>
-            <div class="" id="daily_leaderboard"></div>
+            <div class="" id="streamer_info_leaderboard">
+                <p>Oxalate</p>
+            </div>
+            <div class="" id="daily_leaderboard">
+                <ol>
+                    <li><p>1. Drybonez235 01/01/2023 500 Points</p></li>
+                    <li><p>1. Drybonez235 01/01/2023 500 Points</p></li>
+                    <li><p>1. Drybonez235 01/01/2023 500 Points</p></li>
+                    <li><p>1. Drybonez235 01/01/2023 500 Points</p></li>
+                </ol>
+            </div>
             <div class="" id="all_time_leaderboard"></div>
         </div>
     </section>
