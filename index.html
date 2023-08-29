@@ -3,13 +3,16 @@
     <title>Battle Bets</title>
     <link href="output.css" rel="stylesheet">
 </head>
-<body class="grid columns-2 grid-rows-4 bg-slate-300" id="body">
-    <section class="row-span-2 col-span-1 bg-slate-500" id="left">
+<body class="bg-slate-300 grid grid-cols-2 grid-rows-4" id="body">
+    <section class="bg-slate-500 flex-auto row-span-2" id="left">
         <div class="bg-red-900" id="user_info_box">
-            <div class="" id="player_name">Player Name
-                <input class="" id="player_name_input">
+            <div class="" id="player_name">
+                <p class="inline" id="player_name">Player Name</p>
+                <input class="inline" id="player_name_input">
             </div>
-            <div class="" id="streamer_id">Streamer ID: <input class="" id="streamer_id_input">
+            <div class="" id="streamer_id">
+                <p class="inline" id="streamer_id_text">Streamer ID</p>
+                <input class="inline" id="streamer_id_input">
             </div>
             <section class="inline-block pt-10" id="button_menu">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="start_button">Start</button>
@@ -59,10 +62,10 @@
         <div class="" id="battle_que">
             <div class="" id="que_info"></div>
             <div class="" id="que_boxes">
-                <div class="" id="box_0"></div>
-                <div class="" id="box_1"></div>
-                <div class="" id="box_2"></div>
-                <div class="" id="box_3"></div>
+                <div class="inline bg-green-300 border-2 h-24 w-36" id="box_0"></div>
+                <div class="inline" id="box_1"></div>
+                <div class="inline" id="box_2"></div>
+                <div class="inline" id="box_3"></div>
             </div>
         </div>
     </section>
