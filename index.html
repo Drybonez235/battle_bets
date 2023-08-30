@@ -5,7 +5,7 @@
 </head>
 <body class="bg-slate-300 grid grid-cols-2 grid-rows-4" id="body">
     <section class="bg-slate-500 flex-auto row-span-2" id="left">
-        <div class="bg-red-900" id="user_info_box">
+        <div class="bg-red-900 m-10 p-4" id="user_info_box">
             <div class="" id="player_name">
                 <p class="inline" id="player_name">Player Name</p>
                 <input class="inline" id="player_name_input">
@@ -20,7 +20,7 @@
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="get_more_points">Get more points</button>
             </section>
         </div>
-        <div class="" id="streamer_info">
+        <div class="m-10 bg-lime-500 p-4" id="streamer_info">
             <div class="" id="streamer_name_date">
                 <div class="inline" id="streamer_name">Oxalate</div>
                 <div class="inline" id="current_date">01/01/2023</div>
@@ -42,7 +42,7 @@
 
         </div>
     </section>
-    <section class="col-span-1" id="right">
+    <section class="col-span-1 row-span-2" id="right">
         <div class="" id="leader_board">
             <div class="" id="streamer_info_leaderboard">
                 <p>Oxalate</p>
@@ -58,17 +58,242 @@
             <div class="" id="all_time_leaderboard"></div>
         </div>
     </section>
-    <section class="" id="bottom">
-        <div class="" id="battle_que">
+    <section class="row-span-1 col-span-2 mx-auto" id="bottom">
+        <div class="bg-teal-950" id="battle_que">
             <div class="" id="que_info"></div>
-            <div class="" id="que_boxes">
-                <div class="inline bg-green-300 border-2 h-24 w-36" id="box_0"></div>
-                <div class="inline" id="box_1"></div>
-                <div class="inline" id="box_2"></div>
-                <div class="inline" id="box_3"></div>
+            <div class="block" id="que_boxes">
+                <div class="inline-block m-3 bg-green-300" id="box_0">
+                    <div class="inline-block" id="battle_results_0">
+                        <div class="inline-block" id="oponent_name_div_0">
+                            <p class="inline" id="opponent_string_0">Opponent:</p>
+                            <p class="inline" id="opponent_0_value">Bob</p>
+                        </div>
+                        <div class="inline_block" id="win_loss_div_0">
+                            <p class="inline" id="win_loss_string_0">Battle Result: </p>
+                            <p class="inline" id="win_loss_0">Win</p> 
+                        </div>
+                        <div class="" id="battle_breakdown_div_0">
+                            <div class="" id="crowns_taken_by_opponenet_div_0">
+                                <p class="inline" id="crowns_taken_by_opponenet_string_0">Crowns Taken:</p>
+                                <p class="inline" id="crowns_taken_by_opponenet_value_0">0</p>
+                            </div>
+                            <div class="" id="crowns_taken_by_player_div_0">
+                                <p class="inline" id="crowns_taken_by_player_string_0">Crowns Lost:</p>
+                                <p class="inline" id="crowns_taken_by_player_value_0">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="" id="prediction_results_div_0">
+                        <div class="" id="prediction_result_0">
+                            <p class="inline" id="prediction_result_string_0">Predicition Result: </p>
+                            <p class="inline" id="prediction_result_value_0">Loss</p>
+                        </div>
+                        <div class="" id="points_added_div_0">
+                            <div class="" id="points_bet_div_0">
+                                <p class="inline" id="points_bet_string_0">Points Bet: </p>
+                                <p class="inline" id="points_bet_value_0">300</p>
+                            </div>
+                            <div class="" id="points_won_div_0">
+                                <p class="inline" id="points_won_string_0">Points Won: </p>
+                                <p class="inline" id="points_won_value_0">-300</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inline-block m-3 bg-green-300" id="box_0">
+                    <div class="inline-block" id="battle_results_0">
+                        <div class="inline-block" id="oponent_name_div_0">
+                            <p class="inline" id="opponent_string_0">Opponent:</p>
+                            <p class="inline" id="opponent_0_value">Bob</p>
+                        </div>
+                        <div class="inline_block" id="win_loss_div_0">
+                            <p class="inline" id="win_loss_string_0">Battle Result: </p>
+                            <p class="inline" id="win_loss_0">Win</p> 
+                        </div>
+                        <div class="" id="battle_breakdown_div_0">
+                            <div class="" id="crowns_taken_by_opponenet_div_0">
+                                <p class="inline" id="crowns_taken_by_opponenet_string_0">Crowns Taken:</p>
+                                <p class="inline" id="crowns_taken_by_opponenet_value_0">0</p>
+                            </div>
+                            <div class="" id="crowns_taken_by_player_div_0">
+                                <p class="inline" id="crowns_taken_by_player_string_0">Crowns Lost:</p>
+                                <p class="inline" id="crowns_taken_by_player_value_0">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="" id="prediction_results_div_0">
+                        <div class="" id="prediction_result_0">
+                            <p class="inline" id="prediction_result_string_0">Predicition Result: </p>
+                            <p class="inline" id="prediction_result_value_0">Loss</p>
+                        </div>
+                        <div class="" id="points_added_div_0">
+                            <div class="" id="points_bet_div_0">
+                                <p class="inline" id="points_bet_string_0">Points Bet: </p>
+                                <p class="inline" id="points_bet_value_0">300</p>
+                            </div>
+                            <div class="" id="points_won_div_0">
+                                <p class="inline" id="points_won_string_0">Points Won: </p>
+                                <p class="inline" id="points_won_value_0">-300</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inline-block m-3 bg-green-300" id="box_0">
+                    <div class="inline-block" id="battle_results_0">
+                        <div class="inline-block" id="oponent_name_div_0">
+                            <p class="inline" id="opponent_string_0">Opponent:</p>
+                            <p class="inline" id="opponent_0_value">Bob</p>
+                        </div>
+                        <div class="inline_block" id="win_loss_div_0">
+                            <p class="inline" id="win_loss_string_0">Battle Result: </p>
+                            <p class="inline" id="win_loss_0">Win</p> 
+                        </div>
+                        <div class="" id="battle_breakdown_div_0">
+                            <div class="" id="crowns_taken_by_opponenet_div_0">
+                                <p class="inline" id="crowns_taken_by_opponenet_string_0">Crowns Taken:</p>
+                                <p class="inline" id="crowns_taken_by_opponenet_value_0">0</p>
+                            </div>
+                            <div class="" id="crowns_taken_by_player_div_0">
+                                <p class="inline" id="crowns_taken_by_player_string_0">Crowns Lost:</p>
+                                <p class="inline" id="crowns_taken_by_player_value_0">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="" id="prediction_results_div_0">
+                        <div class="" id="prediction_result_0">
+                            <p class="inline" id="prediction_result_string_0">Predicition Result: </p>
+                            <p class="inline" id="prediction_result_value_0">Loss</p>
+                        </div>
+                        <div class="" id="points_added_div_0">
+                            <div class="" id="points_bet_div_0">
+                                <p class="inline" id="points_bet_string_0">Points Bet: </p>
+                                <p class="inline" id="points_bet_value_0">300</p>
+                            </div>
+                            <div class="" id="points_won_div_0">
+                                <p class="inline" id="points_won_string_0">Points Won: </p>
+                                <p class="inline" id="points_won_value_0">-300</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inline-block m-3 bg-green-300" id="box_0">
+                    <div class="inline-block" id="battle_results_0">
+                        <div class="inline-block" id="oponent_name_div_0">
+                            <p class="inline" id="opponent_string_0">Opponent:</p>
+                            <p class="inline" id="opponent_0_value">Bob</p>
+                        </div>
+                        <div class="inline_block" id="win_loss_div_0">
+                            <p class="inline" id="win_loss_string_0">Battle Result: </p>
+                            <p class="inline" id="win_loss_0">Win</p> 
+                        </div>
+                        <div class="" id="battle_breakdown_div_0">
+                            <div class="" id="crowns_taken_by_opponenet_div_0">
+                                <p class="inline" id="crowns_taken_by_opponenet_string_0">Crowns Taken:</p>
+                                <p class="inline" id="crowns_taken_by_opponenet_value_0">0</p>
+                            </div>
+                            <div class="" id="crowns_taken_by_player_div_0">
+                                <p class="inline" id="crowns_taken_by_player_string_0">Crowns Lost:</p>
+                                <p class="inline" id="crowns_taken_by_player_value_0">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="" id="prediction_results_div_0">
+                        <div class="" id="prediction_result_0">
+                            <p class="inline" id="prediction_result_string_0">Predicition Result: </p>
+                            <p class="inline" id="prediction_result_value_0">Loss</p>
+                        </div>
+                        <div class="" id="points_added_div_0">
+                            <div class="" id="points_bet_div_0">
+                                <p class="inline" id="points_bet_string_0">Points Bet: </p>
+                                <p class="inline" id="points_bet_value_0">300</p>
+                            </div>
+                            <div class="" id="points_won_div_0">
+                                <p class="inline" id="points_won_string_0">Points Won: </p>
+                                <p class="inline" id="points_won_value_0">-300</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inline-block m-3 bg-green-300" id="box_0">
+                    <div class="inline-block" id="battle_results_0">
+                        <div class="inline-block" id="oponent_name_div_0">
+                            <p class="inline" id="opponent_string_0">Opponent:</p>
+                            <p class="inline" id="opponent_0_value">Bob</p>
+                        </div>
+                        <div class="inline_block" id="win_loss_div_0">
+                            <p class="inline" id="win_loss_string_0">Battle Result: </p>
+                            <p class="inline" id="win_loss_0">Win</p> 
+                        </div>
+                        <div class="" id="battle_breakdown_div_0">
+                            <div class="" id="crowns_taken_by_opponenet_div_0">
+                                <p class="inline" id="crowns_taken_by_opponenet_string_0">Crowns Taken:</p>
+                                <p class="inline" id="crowns_taken_by_opponenet_value_0">0</p>
+                            </div>
+                            <div class="" id="crowns_taken_by_player_div_0">
+                                <p class="inline" id="crowns_taken_by_player_string_0">Crowns Lost:</p>
+                                <p class="inline" id="crowns_taken_by_player_value_0">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="" id="prediction_results_div_0">
+                        <div class="" id="prediction_result_0">
+                            <p class="inline" id="prediction_result_string_0">Predicition Result: </p>
+                            <p class="inline" id="prediction_result_value_0">Loss</p>
+                        </div>
+                        <div class="" id="points_added_div_0">
+                            <div class="" id="points_bet_div_0">
+                                <p class="inline" id="points_bet_string_0">Points Bet: </p>
+                                <p class="inline" id="points_bet_value_0">300</p>
+                            </div>
+                            <div class="" id="points_won_div_0">
+                                <p class="inline" id="points_won_string_0">Points Won: </p>
+                                <p class="inline" id="points_won_value_0">-300</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inline-block m-3 bg-green-300" id="box_0">
+                    <div class="inline-block" id="battle_results_0">
+                        <div class="inline-block" id="oponent_name_div_0">
+                            <p class="inline" id="opponent_string_0">Opponent:</p>
+                            <p class="inline" id="opponent_0_value">Bob</p>
+                        </div>
+                        <div class="inline_block" id="win_loss_div_0">
+                            <p class="inline" id="win_loss_string_0">Battle Result: </p>
+                            <p class="inline" id="win_loss_0">Win</p> 
+                        </div>
+                        <div class="" id="battle_breakdown_div_0">
+                            <div class="" id="crowns_taken_by_opponenet_div_0">
+                                <p class="inline" id="crowns_taken_by_opponenet_string_0">Crowns Taken:</p>
+                                <p class="inline" id="crowns_taken_by_opponenet_value_0">0</p>
+                            </div>
+                            <div class="" id="crowns_taken_by_player_div_0">
+                                <p class="inline" id="crowns_taken_by_player_string_0">Crowns Lost:</p>
+                                <p class="inline" id="crowns_taken_by_player_value_0">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="" id="prediction_results_div_0">
+                        <div class="" id="prediction_result_0">
+                            <p class="inline" id="prediction_result_string_0">Predicition Result: </p>
+                            <p class="inline" id="prediction_result_value_0">Loss</p>
+                        </div>
+                        <div class="" id="points_added_div_0">
+                            <div class="" id="points_bet_div_0">
+                                <p class="inline" id="points_bet_string_0">Points Bet: </p>
+                                <p class="inline" id="points_bet_value_0">300</p>
+                            </div>
+                            <div class="" id="points_won_div_0">
+                                <p class="inline" id="points_won_string_0">Points Won: </p>
+                                <p class="inline" id="points_won_value_0">-300</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                </div>
             </div>
         </div>
     </section>
-    <div>adds?
+    <div class="row-span-1" id="adds">
     </div>
 </body>
