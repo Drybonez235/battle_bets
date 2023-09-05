@@ -1,4 +1,6 @@
-const game_tracker_array = [[],[],[],[]];// Id doesn't need empty games.. It just needs to look that way.
+
+
+const game_tracker_array = [];// Id doesn't need empty games.. It just needs to look that way.
 let global_win_rate = 0;
 let points_bet = 1000;
 
