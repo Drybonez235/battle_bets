@@ -5,16 +5,16 @@
     <link href="output.css" rel="stylesheet">
 </head>
 
-<body class="bg-slate-300 grid grid-cols-2 grid-rows-4" id="body">
-    <section class="bg-slate-500 flex-auto row-span-2" id="left">
-        <div class="bg-red-900 m-10 p-4" id="user_info_box">
+<body class="bg-black grid grid-cols-2 grid-rows-4" id="body">
+    <section class="flex-auto row-span-2" id="left">
+        <div class="bg-black m-10 p-4 text-white border-2 border-white" id="user_info_box">
             <div class="" id="player_name">
-                <p class="inline" id="player_name">Player Name</p>
-                <input class="inline" id="player_name_input">
+                <p class="inline" id="player_name">Player Name:</p>
+                <input class="inline text-black" type="text" id="player_name_input">
             </div>
-            <div class="" id="streamer_id">
-                <p class="inline" id="streamer_id_text">Streamer ID</p>
-                <input class="inline" id="streamer_id_input">
+            <div class="mt-2" id="streamer_id">
+                <p class="inline" id="streamer_id_text">Streamer ID:</p>
+                <input class="inline text-black" type="text" id="streamer_id_input">
             </div>
             <section class="inline-block pt-10" id="button_menu">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -25,10 +25,10 @@
                     id="get_more_points">Get more points</button>
             </section>
         </div>
-        <div class="m-10 bg-lime-500 p-4" id="streamer_info">
+        <div class="m-10 bg-black p-4 text-white border-2 border-white" id="streamer_info">
             <div class="" id="streamer_name_date">
-                <div class="inline" id="streamer_name">Oxalate</div>
-                <div class="inline" id="current_date">01/01/2023</div>
+                <p class="inline" id="streamer_name">Streamer Name</p>
+                <p class="inline ml-8" id="current_date">01.01.2023</p>
             </div>
             <div class="inline-block pt-10" id="player_stats_group">
                 <div class="inline-block" id="streamer_wins">
@@ -47,32 +47,74 @@
 
         </div>
     </section>
-    <section class="col-span-1 row-span-2" id="right">
-        <div class="" id="leader_board">
-            <div class="" id="streamer_info_leaderboard">
-                <p>Oxalate</p>
-            </div>
-            <div class="" id="daily_leaderboard">
+    <section class="col-span-1 row-span-2 text-white border-2 border-white m-10" id="right">
+        <div class="m-2 mt-8 grid grid-cols-2 gap-2" id="leader_board">
+            <div class="col-span-1 inline-block" id="daily_leaderboard">
                 <ol>
                     <li>
                         <p>1. Drybonez235 01/01/2023 500 Points</p>
                     </li>
                     <li>
-                        <p>1. Drybonez235 01/01/2023 500 Points</p>
+                        <p>2. Drybonez235 01/01/2023 500 Points</p>
                     </li>
                     <li>
-                        <p>1. Drybonez235 01/01/2023 500 Points</p>
+                        <p>3. Drybonez235 01/01/2023 500 Points</p>
                     </li>
                     <li>
-                        <p>1. Drybonez235 01/01/2023 500 Points</p>
+                        <p>4. Drybonez235 01/01/2023 500 Points</p>
+                    </li>
+                    <li>
+                        <p>5. Drybonez235 01/01/2023 500 Points</p>
+                    </li>
+                    <li>
+                        <p>6. Drybonez235 01/01/2023 500 Points</p>
+                    </li>
+                    <li>
+                        <p>7. Drybonez235 01/01/2023 500 Points</p>
+                    </li>
+                    <li>
+                        <p>8. Drybonez235 01/01/2023 500 Points</p>
+                    </li>
+                    <li>
+                        <p>9. Drybonez235 01/01/2023 500 Points</p>
                     </li>
                 </ol>
             </div>
-            <div class="" id="all_time_leaderboard"></div>
+            <div class="col-span-1 inline" id="all_time_leaderboard">
+                <ol>
+                    <li>
+                        <p>1. Drybonez235 01/01/2023 500 Points</p>
+                    </li>
+                    <li>
+                        <p>2. Drybonez235 01/01/2023 500 Points</p>
+                    </li>
+                    <li>
+                        <p>3. Drybonez235 01/01/2023 500 Points</p>
+                    </li>
+                    <li>
+                        <p>4. Drybonez235 01/01/2023 500 Points</p>
+                    </li>
+                    <li>
+                        <p>5. Drybonez235 01/01/2023 500 Points</p>
+                    </li>
+                    <li>
+                        <p>6. Drybonez235 01/01/2023 500 Points</p>
+                    </li>
+                    <li>
+                        <p>7. Drybonez235 01/01/2023 500 Points</p>
+                    </li>
+                    <li>
+                        <p>8. Drybonez235 01/01/2023 500 Points</p>
+                    </li>
+                    <li>
+                        <p>9. Drybonez235 01/01/2023 500 Points</p>
+                    </li>
+                </ol> 
+            </div>
         </div>
     </section>
     <section class="row-span-2 col-span-2 mx-auto pt-5" id="bottom">
-        <div class="bg-teal-950 p-2 rounded-3xl" id="battle_que">
+        <div class="bg-yellow-200 p-2 rounded-3xl" id="battle_que">
             <div class="inline-block" id="que_boxes">
                 <!-- This is box 0 which is a battle result-->
                 <div class="inline-block bg-white rounded-3xl p-1" id="box_0">
