@@ -13,10 +13,29 @@ const get_values = () =>{
     console.log(bet_amount);
 }
 
-const add_crown = (tag, win_lose) => {
-    
+const add_crown = (tag_id, win_lose) => {
+    const blue_crown = "images/blue_crown.png";
+    const red_crown = "images/red_crown.png"
+
+    let current_crown = document.getElementById(tag_id);
+    if(win_lose == "win"){
+        current_crown.outerHTML = "<img id='" + tag_id + "' class='inline object-contain h-8' onclick=\"remove_crown('"+ tag_id + "', 'win')\" src='" + red_crown + "'>";
+    } else{
+        current_crown.outerHTML = "<img id='" + tag_id + "' class='inline object-contain h-8' onclick=\"remove_crown('"+ tag_id + "', 'lose')\" src='" + blue_crown + "'>";
+    }
 }
 
+const remove_crown = (tag_id, win_lose) => {
+    const blue_crown = "images/blue_crown_outline.png";
+    const red_crown = "images/red_crown_outline.png";
+
+    let current_crown = document.getElementById(tag_id);
+    if(win_lose == "win"){
+        current_crown.outerHTML = "<img id='" + tag_id+ "' class='inline object-contain h-8' onclick=\"add_crown('" + tag_id + "', 'win')\" src='" + red_crown + "'>";
+    } else{
+        current_crown.outerHTML = "<img id='" + tag_id+ "' class='inline object-contain h-8' onclick=\"add_crown('" + tag_id + "', 'lose')\" src='" + blue_crown + "'>";
+    }
+}
 
 const reset_bet = () => {
     let win_lose_toggle = document.getElementById("win_loss_toggle_input_value");
