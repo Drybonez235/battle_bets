@@ -41,7 +41,7 @@
                 </div>
                 <div class="inline-block" id="streamer_win_percentage">
                     <p class="">Win Percentage</p>
-                    <p class="" id="streamer_losses_number">0</p>
+                    <p class="" id="streamer_win_rate_number">.50</p>
                 </div>
             </div>
 
@@ -181,7 +181,7 @@
                         </div>
                         <div class="mt-1" id="middle_1">
                             <div class="" id="win_loss_toggle_div_1">
-                            <label class="relative cursor-pointer" id="crowns_taken_1">
+                            <label class="relative cursor-pointer" id="win_loss_toggle_1">
                                 <input type="checkbox" value="" class="sr-only peer" id="win_loss_toggle_input_value" checked>
                                 <div
                                     class="w-12 h-6 text-xs bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 after:content-['Lose'] peer-checked:after:translate-x-3 peer-checked:after:border-white peer-checked:after:content-['Win'] after:absolute after:left-[2px] after:bg-white after:border-gray-300 after:border after:top-0.5 after:rounded-full after:h-5 after:w-8 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
@@ -190,7 +190,7 @@
                             </div>
                             <div class="mt-2" id="crowns_taken_toggle_div_1">
                             <label class="relative cursor-pointer">
-                                <input type="checkbox" value="" class="sr-only peer" id="crowns_taken_toggle_1">
+                                <input type="checkbox" value="" class="sr-only peer" id="crowns_taken_toggle_1" onchange="calculator_gun()">
                                 <div
                                     class="w-11 h-6 bg-gray-200 inline-block rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.0 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
                                 </div>
@@ -203,18 +203,23 @@
                             </label>
                             </div>
                             <div class="" id="crowns_lost_toggle_div_1">
-                                <input type="checkbox" id="crowns_lost_toggle_labe" class = "peer/lost_toggle bg-gray-200 inline-block rounded-full checked:after:translate-x-full dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full checked:after:border-white after:absolute after:top-0.0 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 checked:bg-blue-600">
-                                <span>Crowns Taken</span>
-                                <div class="group invisible peer-checked/lost_toggle:visible" id="crowns_lost_div">
-                                    <img id="blue_1" class="invisible group-hover:visible inline object-contain h-8" onclick="add_crown('blue_1', 'win')" src="images/red_crown_outline.png">
-                                    <img id="blue_2" class="invisible group-hover:visible inline object-contain h-8" onclick="add_crown('blue_2', 'win')" src="images/red_crown_outline.png">
-                                    <img id="blue_3" class="invisible group-hover:visible inline object-contain h-8" onclick="add_crown('blue_3', 'win')" src="images/red_crown_outline.png">
+                                <label  class="relative cursor-pointer">
+                                <input type="checkbox" value="" id="crowns_lost_toggle_1" class="sr-only peer" onchange="calculator_gun()">
+                                <div
+                                    class="w-11 h-6 bg-gray-200 inline-block rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:group-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.0 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                                </div>
+                                <span>Crowns Lost</span>
+                                </label>
+                                <div class="group" id="crowns_lost_div">
+                                    <img id="blue_1" class="cursor-pointer group-hover:visible inline object-contain h-8" onclick="add_crown('blue_1', 'win')" src="images/red_crown_outline.png">
+                                    <img id="blue_2" class="cursor-pointer group-hover:visible inline object-contain h-8" onclick="add_crown('blue_2', 'win')" src="images/red_crown_outline.png">
+                                    <img id="blue_3" class="cursor-pointer group-hover:visible inline object-contain h-8" onclick="add_crown('blue_3', 'win')" src="images/red_crown_outline.png">
                                 </div>
                             </div>
                         </div>
                         <div class="border-t-2 mt-2 mb-2" id="end_1">
                             <div class="" id="">
-                               <input class="ml-3 bg-slate-300 w-14" value="200" id="points_bet_1" type="number"></input> 
+                               <input class="ml-3 bg-slate-300 w-14" min="0" max="1000000" step="50" value="200" id="points_bet_1" oninput="calculator_gun()" type="number"></input> 
                                <img class="inline h-8 object-contain" src="images/arrow.png">
                                <p class="inline" id="calculated_bet_number">500</p>
                             </div>
@@ -231,4 +236,5 @@
     <div class="row-span-1 col-span-2" id="adds">
     </div>
     <script src="html_javascript.js"></script>
+    ><script src="user_interface_logic.js"></script>
 </body>
