@@ -1,14 +1,36 @@
-
-
 const game_tracker_array = [];// Id doesn't need empty games.. It just needs to look that way.
-let global_win_rate = 0;
-let points_bet = 1000;
-
-//I need to figure out how the JS is going to get win rate and points bet. 
 
 game_tracker_array[3] = ["Jonathan", 1, 2];
 
 //game("Jonathan", 1, 2, "10")
+
+function array_builder(){
+    let number = parseInt(document.getElementById("points_bet_1").value);
+    let potential_points = parseFloat(document.getElementById("calculated_bet_number").innerHTML);
+    let crowns_taken_checked = document.getElementById("crowns_taken_toggle_1").checked ? 1:0;
+    let crowns_lost_checked = document.getElementById("crowns_lost_toggle_1").checked ? 1:0;
+    let win_lose_toggle = document.getElementById("win_loss_toggle_input_value").checked ? 1:0;
+    let blue_crowns_checked = parseInt(document.getElementById("blue_crowns_checked").value);
+    let red_crowns_checked = parseInt(document.getElementById("red_crowns_checked").value);
+    let box_1 = document.getElementById("place_bet"); 
+    
+    const values = {
+        "Points_bet": number,
+        "win_or_lose": win_lose_toggle,
+        "potential_points": potential_points,
+        "bet_on_crowns_taken": crowns_taken_checked,
+        "bet_on_crwons_lost": crowns_lost_checked,
+        "red_crowns_int": red_crowns_checked,
+        "blue_crowns_int": blue_crowns_checked,
+    }
+    game_tracker_array.unshift(values);
+
+    box_1.disabled = true;
+    console.log(win_lose_toggle);
+    console.log(blue_crowns_checked);
+    console.log(red_crowns_checked);
+    console.log(values);
+}
 
 function game(player_id_string, win_loss_bool, crowns_take_int, game_time){
     console.log("Game Function");
@@ -60,10 +82,10 @@ function winning_points_calculator(win_rate, points_bet){
 
 function calculator_gun(){
     let number = parseInt(document.getElementById("points_bet_1").value);
-    let win_rate = parseFloat(document.getElementById("streamer_win_rate_number").innerHTML);
+    let win_rate = parseFloat(document.getElementById("streamer_win_rate_number").innerHTML) / 100;
     let potential_points = document.getElementById("calculated_bet_number");
-    let crowns_taken_checked = document.getElementById("crowns_won_toggle_1").checked ? 1:0;
-    let crowns_lost_checked = document.getElementById("crowns_lost_toggle_1").checked  ? 1:0;
+    let crowns_taken_checked = document.getElementById("crowns_taken_toggle_1").checked ? 1:0;
+    let crowns_lost_checked = document.getElementById("crowns_lost_toggle_1").checked ? 1:0;
     let win_lose_toggle = document.getElementById("win_loss_toggle_input_value").checked ? 1:0;
     let win_rate_multiplier = 0.0;
 
@@ -73,13 +95,6 @@ function calculator_gun(){
     } else {//This is if od win rate is 100 and they predict he loses. 
         win_rate_multiplier = 1 + win_rate;
     }
-
-    console.log(win_lose_toggle);
-    console.log(crowns_taken_checked);
-    console.log(crowns_lost_checked);
-    console.log(number);
-    console.log(win_rate);
-
     potential_points.innerHTML = number * win_rate_multiplier * (crowns_taken_checked + crowns_lost_checked + 1);
     return;
 }
