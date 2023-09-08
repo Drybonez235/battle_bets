@@ -172,6 +172,50 @@
                     </div>
                 </div>
 
+                <!--this will be the result div skelaton-->
+                <div class="inline-block bg-white rounded-3xl ml-2 p-1" id="result_div_structure_">
+                    <div class="" id="result_div_container_">
+                        <div class="border-b-2 " id="result_top_">
+                            <p class="text-center" id="">Battle Number: <span id="battle_number_value_">__</span></p>
+                            <p class="inline-block" id="prediction_results_game_">You WIN</p>
+                            <img class="object-contain h-10 inline" src="images/emote_king_thumbs_up.png">
+                        </div>
+                        <div class="mt-1" id="result_middle_">
+                            <div class="" id="result_battle_win_loss_div_">
+                                <p class="" id="result_battle_win_loss_text_">Battle Result: WIN</p>
+                                <img class="object-contain h-8" id="result_battle_win_loss_img_" src="">
+                            </div>
+                            <!-- So here we are going to outline it with red or green depending on if they got it right or not.-->
+                            <div class="mt-2" id="result_crowns_taken_div_">
+                                <p class="result_crowns_taken_text_">Crowns Taken</p>
+                                <div class="inline-block" id="crowns_taken_img_div_">
+                                    <img class="object-contain inline bg-red-600 rounded-full h-8" src="images/crown_red.png">
+                                    <img class="object-contain inline bg-green-600 rounded-full h-8" src="images/crown_red.png">
+                                    <img class="object-contain inline bg-green-600 rounded-full h-8" src="images/crown_red.png">
+                                </div>
+                            </div>
+                            <div class="" id="result_crowns_lost_div_">
+                                <p class="result_crowns_taken_text_">Crowns Lost</p>
+                                <div class="group" id="crowns_lost_img_div_">
+                                    <img class="object-contain inline bg-red-600 rounded-full h-8" src="images/blue_crown.png">
+                                    <img class="object-contain inline bg-green-600 rounded-full h-8" src="images/blue_crown.png">
+                                    <img class="object-contain inline bg-green-600 rounded-full h-8" src="images/blue_crown.png">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-t-2 mt-2 mb-2" id="result_end_">
+                            <div class="" id="">
+                                 <p class="" id="result_points_bet_text_">Points Bet:
+                                 <span class="inline" id="result_points_bet_value_">30</span></p>
+                            </div>
+                            <div>
+                                <p class="rounded-3xl bg-emerald-500
+                                " id="result_points_won_text">+
+                                <span class="" id="result_points_won_value">400</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- This is box 1 which is a battle result-->
                 <div class="inline-block bg-white rounded-3xl ml-2 p-1" id="box_1">
                     <div class="" id="grid_0">

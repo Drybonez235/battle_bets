@@ -22,6 +22,7 @@ function array_builder(){
         "bet_on_crwons_lost": crowns_lost_checked,
         "red_crowns_int": red_crowns_checked,
         "blue_crowns_int": blue_crowns_checked,
+        "Points_bet": number,
     }
     game_tracker_array.unshift(values);
 
@@ -98,3 +99,5 @@ function calculator_gun(){
     potential_points.innerHTML = number * win_rate_multiplier * (crowns_taken_checked + crowns_lost_checked + 1);
     return;
 }
+
+export{game_tracker_array, game_results_array};
