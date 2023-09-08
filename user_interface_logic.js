@@ -1,6 +1,18 @@
-const game_tracker_array = [];// Id doesn't need empty games.. It just needs to look that way.
+let game_tracker_array = [];// Id doesn't need empty games.. It just needs to look that way.
+let game_results_array = [
+    {
+    "win_lose" : 0,
+    "crowns_taken" : 3,
+    "crowns_lost" : 2,
+    "opponent_name" : "drybonez"
+}];
 
-game_tracker_array[3] = ["Jonathan", 1, 2];
+//game results data.... 
+//Oponent Name: name
+//Win_Lose : 0 or 1
+//Crowns Taken 0-3
+//Crowns Lost 0 -3
+
 
 //game("Jonathan", 1, 2, "10")
 
@@ -10,23 +22,22 @@ function array_builder(){
     let crowns_taken_checked = document.getElementById("crowns_taken_toggle_1").checked ? 1:0;
     let crowns_lost_checked = document.getElementById("crowns_lost_toggle_1").checked ? 1:0;
     let win_lose_toggle = document.getElementById("win_loss_toggle_input_value").checked ? 1:0;
-    let blue_crowns_checked = parseInt(document.getElementById("blue_crowns_checked").value);
-    let red_crowns_checked = parseInt(document.getElementById("red_crowns_checked").value);
+    let blue_crowns_int = parseInt(document.getElementById("blue_crowns_checked").value);
+    let red_crowns_int = parseInt(document.getElementById("red_crowns_checked").value);
     let box_1 = document.getElementById("place_bet"); 
     
     const values = {
-        "Points_bet": number,
         "win_or_lose": win_lose_toggle,
-        "potential_points": potential_points,
+        "red_crowns_int": red_crowns_int,
+        "blue_crowns_int": blue_crowns_int,
         "bet_on_crowns_taken": crowns_taken_checked,
         "bet_on_crwons_lost": crowns_lost_checked,
-        "red_crowns_int": red_crowns_checked,
-        "blue_crowns_int": blue_crowns_checked,
         "Points_bet": number,
+        "potential_points": potential_points,
     }
     game_tracker_array.unshift(values);
 
-    box_1.disabled = true;
+    //box_1.disabled = true;
     console.log(win_lose_toggle);
     console.log(blue_crowns_checked);
     console.log(red_crowns_checked);
@@ -100,4 +111,4 @@ function calculator_gun(){
     return;
 }
 
-export{game_tracker_array, game_results_array};
+//export{game_tracker_array, game_results_array, calculator_gun};

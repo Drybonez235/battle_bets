@@ -55,9 +55,19 @@ const reset_bet = () => {
     let crowns_lost_toggle = document.getElementById("crowns_lost_toggle_1");
     let bet_amount = document.getElementById("points_bet_1");
     let projected_winnings = document.getElementById("calculated_bet_number");
+    let blue_crown_count = document.getElementById("blue_crowns_checked");
+    let red_crown_count = document.getElementById("red_crowns_checked");
+    let blue_crowns_count_value = parseInt(blue_crown_count.value);
+    let red_crowns_count_value = parseInt(red_crown_count.value);
+    remove_crown("red_1", "win");
+    remove_crown("red_2", "win");
+    remove_crown("red_3", "win");
+    remove_crown("blue_1", "l");
+    remove_crown("blue_2", "l");
+    remove_crown("blue_3", "l");
 
-
-
+    red_crown_count.value = 0;
+    blue_crown_count.value = 0; 
      win_lose_toggle.checked = false;
      crowns_taken_toggle.checked = false;
     crowns_lost_toggle.checked = false; 
@@ -66,11 +76,18 @@ const reset_bet = () => {
 }
 
 const results_builder = () =>{
-    game_tracker_array
+    predicion_win_lose = game_tracker_array[0].win_or_lose;
+    prediction_crowns_taken = game_tracker_array[0].red_crowns_int;
+    predicion_crowns_lost = game_tracker_array[0].blue_crowns_int;
+
+    results_win_lose = game_results_array[0].win_lose;
+    results_crowns_taken = game_results_array[0].crowns_taken;
+    results_crowns_lost = game_results_array[0].crowns_lost;
+    
     const thumbs_up = '<img class="object-contain h-10 inline" src="images/emote_king_thumbs_up.png">'
     const thumbs_down = '<img class="object-contain h-10 inline" src="images/emote_king_cry.png">'
-    const crowns_taken_images = crowns_taken_img_builder();
-    const crowns_lost_images = crowns_lost_img_builder(); 
+    const crowns_taken_images = crowns_taken_img_builder(results_crowns_taken, prediction_crowns_taken);
+    const crowns_lost_images = crowns_lost_img_builder(results_crowns_lost, predicion_crowns_lost); 
     const win_lose = ''
     const game_id = ''
 
@@ -111,7 +128,8 @@ const results_builder = () =>{
             </div>
         </div>
     </div>
-</div>`  
+</div>` 
+document.write(div_structure) 
 }
 
 const crowns_taken_img_builder = (crowns_taken, crowns_taken_predicted) => {
