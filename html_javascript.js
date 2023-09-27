@@ -50,6 +50,7 @@ const remove_crown = (tag_id, win_lose) => {
 }
 
 const reset_bet = () => {
+    array_builder();
     let win_lose_toggle = document.getElementById("win_loss_toggle_input_value");
     let crowns_taken_toggle = document.getElementById("crowns_taken_toggle_1");
     let crowns_lost_toggle = document.getElementById("crowns_lost_toggle_1");
@@ -68,11 +69,11 @@ const reset_bet = () => {
 
     red_crown_count.value = 0;
     blue_crown_count.value = 0; 
-     win_lose_toggle.checked = false;
-     crowns_taken_toggle.checked = false;
+    win_lose_toggle.checked = false;
+    crowns_taken_toggle.checked = false;
     crowns_lost_toggle.checked = false; 
-     bet_amount.value = 0;
-     projected_winnings.innerHTML = 0;
+    bet_amount.value = 0;
+    projected_winnings.innerHTML = 0;
 }
 
 const results_builder = () =>{
@@ -89,7 +90,7 @@ const results_builder = () =>{
     const crowns_taken_images = crowns_taken_img_builder(results_crowns_taken, prediction_crowns_taken);
     const crowns_lost_images = crowns_lost_img_builder(results_crowns_lost, predicion_crowns_lost); 
     const win_lose = ''
-    const game_id = ''
+    const game_id = '1'
 
     const div_structure = `<div class="inline-block bg-white rounded-3xl ml-2 p-1" id="result_div_structure_${game_id}">
     <div class="" id="result_div_container_${game_id}">
@@ -129,7 +130,8 @@ const results_builder = () =>{
         </div>
     </div>
 </div>` 
-document.write(div_structure) 
+//document.write(div_structure); 
+document.getElementById("result_div_structure_").insertAdjacentHTML('afterend',div_structure);
 }
 
 const crowns_taken_img_builder = (crowns_taken, crowns_taken_predicted) => {
@@ -182,7 +184,7 @@ const crowns_lost_img_builder = (crowns_lost, crowns_lost_predicted) => {
 
         } else if (crowns_lost_number > 0 && crowns_lost_predicted_number == 0){
             crowns_lost_img = crowns_lost_img.concat(blue_crown_red);
-            crowns_lost_number = crowns_taken_number - 1;
+            crowns_lost_number = crowns_lost_number - 1;
 
         } else if(crowns_lost_number == 0 && crowns_lost_predicted_number == 0){
             crowns_lost_img = crowns_lost_img.concat(blue_crown_green_outline);

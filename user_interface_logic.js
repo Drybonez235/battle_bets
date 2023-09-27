@@ -1,9 +1,9 @@
 let game_tracker_array = [];// Id doesn't need empty games.. It just needs to look that way.
 let game_results_array = [
     {
-    "win_lose" : 0,
-    "crowns_taken" : 3,
-    "crowns_lost" : 2,
+    "win_lose" : 1,
+    "crowns_taken" : 1,
+    "crowns_lost" : 3,
     "opponent_name" : "drybonez"
 }];
 
