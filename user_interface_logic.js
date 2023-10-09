@@ -2,8 +2,8 @@ let game_tracker_array = [];// Id doesn't need empty games.. It just needs to lo
 let game_results_array = [
     {
     "win_lose" : 1,
-    "crowns_taken" : 1,
-    "crowns_lost" : 3,
+    "crowns_taken" : 3,
+    "crowns_lost" : 1,
     "opponent_name" : "drybonez"
 }];
 
@@ -32,7 +32,7 @@ function array_builder(){
         "blue_crowns_int": blue_crowns_int,
         "bet_on_crowns_taken": crowns_taken_checked,
         "bet_on_crwons_lost": crowns_lost_checked,
-        "Points_bet": number,
+        "points_bet": number,
         "potential_points": potential_points,
     }
     game_tracker_array.unshift(values);

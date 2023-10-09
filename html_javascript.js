@@ -77,34 +77,32 @@ const reset_bet = () => {
 }
 
 const results_builder = () =>{
-    predicion_win_lose = game_tracker_array[0].win_or_lose;
+    prediction_win_lose = game_tracker_array[0].win_or_lose;
     prediction_crowns_taken = game_tracker_array[0].red_crowns_int;
     predicion_crowns_lost = game_tracker_array[0].blue_crowns_int;
+    prediction_points_bet = game_tracker_array[0].points_bet;
 
     results_win_lose = game_results_array[0].win_lose;
     results_crowns_taken = game_results_array[0].crowns_taken;
     results_crowns_lost = game_results_array[0].crowns_lost;
     
-    const thumbs_up = '<img class="object-contain h-10 inline" src="images/emote_king_thumbs_up.png">'
-    const thumbs_down = '<img class="object-contain h-10 inline" src="images/emote_king_cry.png">'
     const crowns_taken_images = crowns_taken_img_builder(results_crowns_taken, prediction_crowns_taken);
     const crowns_lost_images = crowns_lost_img_builder(results_crowns_lost, predicion_crowns_lost); 
-    const win_lose = ''
-    const game_id = '1'
-
+    const prediction_win_lose_image = prediction_result_builder(prediction_win_lose, results_win_lose);
+    const battle_result_html = battle_results_builder(results_crowns_taken, results_crowns_lost);    
+    const win_lose = '';
+    const game_id = '2';
+    console.log(prediction_win_lose_image);
     const div_structure = `<div class="inline-block bg-white rounded-3xl ml-2 p-1" id="result_div_structure_${game_id}">
     <div class="" id="result_div_container_${game_id}">
         <div class="border-b-2 " id="result_top_${game_id}">
-            <p class="text-center" id="">Battle Number: <span id="battle_number_value_${game_id}">__</span></p>
-            <p class="inline-block" id="prediction_results_game_${game_id}">You WIN</p>
-            <img class="object-contain h-10 inline" src="images/emote_king_thumbs_up.png">
+            <p class="text-center" id="">Battle Number: <span id="battle_number_value_${game_id}"> ${game_id}</span></p>
+            ${prediction_win_lose_image}
         </div>
         <div class="mt-1" id="result_middle_${game_id}">
             <div class="" id="result_battle_win_loss_div_${game_id}">
-                <p class="" id="result_battle_win_loss_text_${game_id}">Battle Result: WIN</p>
-                <img class="object-contain h-8" id="result_battle_win_loss_img_${game_id}" src="">
+               ${battle_result_html} 
             </div>
-            <!-- So here we are going to outline it with red or green depending on if they got it right or not.-->
             <div class="mt-2" id="result_crowns_taken_div_${game_id}">
                 <p class="result_crowns_taken_text_${game_id}">Crowns Taken</p>
                 <div class="inline-block" id="crowns_taken_img_div_${game_id}">
@@ -121,7 +119,7 @@ const results_builder = () =>{
         <div class="border-t-2 mt-2 mb-2" id="result_end_${game_id}">
             <div class="" id="">
                  <p class="" id="result_points_bet_text_${game_id}">Points Bet:
-                 <span class="inline" id="result_points_bet_value_${game_id}">30</span></p>
+                 <span class="inline" id="result_points_bet_value_${game_id}">${prediction_points_bet}</span></p>
             </div>
             <div>
                 <p class="rounded-3xl bg-emerald-50" id="result_points_won_text_${game_id}">+
@@ -191,4 +189,30 @@ const crowns_lost_img_builder = (crowns_lost, crowns_lost_predicted) => {
         }
     }
     return crowns_lost_img;
+}
+
+const prediction_result_builder = (prediction_win_lose, results_win_lose) => {
+    const thumbs_up = '<img class="object-contain h-10 inline" src="images/emote_king_thumbs_up.png">';
+    const thumbs_down = '<img class="object-contain h-10 inline" src="images/emote_king_cry.png">';
+    const you_lose = '<p class="inline-block" id="prediction_results_game_${game_id}">You Lost.</p>'
+    const you_win = '<p class="inline-block" id="prediction_results_game_${game_id}">You Won!</p>'
+    let prediciton_result_html = "";
+    if(prediction_win_lose == results_win_lose){
+        prediciton_result_html = prediciton_result_html.concat(you_win + thumbs_up);
+    }else{
+        prediciton_result_html = prediciton_result_html.concat(you_lose + thumbs_down);
+    }
+    return prediciton_result_html;
+}
+
+const battle_results_builder = (results_crowns_taken, results_crowns_lost) => {
+    red_win = '<p class="">Battle Result: Red Wins</p>';
+    blue_win = '<p class="">Battle Result: Blue Wins</p>';
+    battle_results_html = '';
+    if(results_crowns_taken < results_crowns_lost){
+        battle_results_html = battle_results_html.concat(red_win);
+    } else{
+        battle_results_html = battle_results_html.concat(blue_win);
+    }
+    return battle_results_html;
 }
