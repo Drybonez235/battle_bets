@@ -85,12 +85,15 @@ const results_builder = () =>{
     results_win_lose = game_results_array[0].win_lose;
     results_crowns_taken = game_results_array[0].crowns_taken;
     results_crowns_lost = game_results_array[0].crowns_lost;
+    points_to_win = game_tracker_array[0].potential_points;
     
     const crowns_taken_images = crowns_taken_img_builder(results_crowns_taken, prediction_crowns_taken);
     const crowns_lost_images = crowns_lost_img_builder(results_crowns_lost, predicion_crowns_lost); 
     const prediction_win_lose_image = prediction_result_builder(prediction_win_lose, results_win_lose);
-    const battle_result_html = battle_results_builder(results_crowns_taken, results_crowns_lost);    
-    const win_lose = '';
+    const battle_result_html = battle_results_builder(results_crowns_taken, results_crowns_lost);
+    const win_lose = bet_analyzer();
+    const math_sign = win_lose ? "+" : "-";
+    const points = win_lose ? points_to_win : 0;
     const game_id = '2';
     console.log(prediction_win_lose_image);
     const div_structure = `<div class="inline-block bg-white rounded-3xl ml-2 p-1" id="result_div_structure_${game_id}">
@@ -122,8 +125,8 @@ const results_builder = () =>{
                  <span class="inline" id="result_points_bet_value_${game_id}">${prediction_points_bet}</span></p>
             </div>
             <div>
-                <p class="rounded-3xl bg-emerald-50" id="result_points_won_text_${game_id}">+
-                <span class="" id="result_points_won_value_${game_id}">400</span></p>
+                <p class="rounded-3xl bg-emerald-50" id="result_points_won_text_${game_id}">
+                <span class="" id="result_points_won_value_${game_id}">${math_sign}${points}</span></p>
             </div>
         </div>
     </div>

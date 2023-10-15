@@ -61,22 +61,30 @@ function game_array_pusher(game_result){
     game_tracker_array[2] = game_result;
     bet_analyzer(); 
 }
-
+//
 function bet_analyzer(){
-    console.log("be_analaizer");
-    let prediction = game_tracker_array[3];
-    let game_result = game_tracker_array[2];
-    for(let i = 0; i < prediction.length; i++){
-        if(prediction[i] == game_result[i] ){
-            continue;
-        } else{
-            console.log("You lost");
-            return 0;
-        }    
-    }
-   winning_points_calculator(global_win_rate, points_bet) 
-}
+    win_lose_toggle = game_results_array[0].win_or_lose;
+    crowns_taken_checked = game_results_array[0].bet_on_crowns_taken;
+    crowns_lost_checked = game_results_array[0].bet_on_crwons_lost;
 
+    if(win_lose_toggle != game_results_array[0].win_lose){
+        return false;
+    }
+
+    if(crowns_taken_checked){
+        if(game_results_array[0].crowns_taken != game_tracker_array[0].red_crowns_int){
+            return false;
+        }
+    }
+    
+    if(crowns_lost_checked){
+        if(game_results_array[0].crowns_lost != game_tracker_array[0].blue_crowns_int){
+            return false;
+        }
+    }
+    return true;
+}
+//Probably going to delete this code.
 function winning_points_calculator(win_rate, points_bet){
     let win_rate_multiplier = 0.0;
     let win_lose = game_tracker_array[2][1] ? 1:0;
