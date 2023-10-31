@@ -31,18 +31,12 @@ function array_builder(){
         "red_crowns_int": red_crowns_int,
         "blue_crowns_int": blue_crowns_int,
         "bet_on_crowns_taken": crowns_taken_checked,
-        "bet_on_crwons_lost": crowns_lost_checked,
+        "bet_on_crowns_lost": crowns_lost_checked,
         "points_bet": number,
         "potential_points": potential_points,
     }
     game_tracker_array.unshift(values);
-
-    //box_1.disabled = true;
-    console.log(win_lose_toggle);
-    console.log(blue_crowns_checked);
-    console.log(red_crowns_checked);
-    console.log(values);
-}
+} 
 
 function game(player_id_string, win_loss_bool, crowns_take_int, game_time){
     console.log("Game Function");
@@ -54,36 +48,36 @@ function game(player_id_string, win_loss_bool, crowns_take_int, game_time){
     game_array_pusher(game_result);
 }
 
-function game_array_pusher(game_result){
-   console.log("game array pusher function"); 
-    game_tracker_array[0] = game_tracker_array[1];
-    game_tracker_array[1] = game_tracker_array[2];
-    game_tracker_array[2] = game_result;
-    bet_analyzer(); 
-}
+// function game_array_pusher(game_result){
+//    console.log("game array pusher function"); 
+//     game_tracker_array[0] = game_tracker_array[1];
+//     game_tracker_array[1] = game_tracker_array[2];
+//     game_tracker_array[2] = game_result;
+//     bet_analyzer(); 
+// }
 //
-function bet_analyzer(){
-    win_lose_toggle = game_results_array[0].win_or_lose;
-    crowns_taken_checked = game_results_array[0].bet_on_crowns_taken;
-    crowns_lost_checked = game_results_array[0].bet_on_crwons_lost;
+// function bet_analyzer(){
+//     win_lose_toggle = game_results_array[0].win_or_lose;
+//     crowns_taken_checked = game_results_array[0].bet_on_crowns_taken;
+//     crowns_lost_checked = game_results_array[0].bet_on_crwons_lost;
 
-    if(win_lose_toggle != game_results_array[0].win_lose){
-        return false;
-    }
+//     if(win_lose_toggle != game_results_array[0].win_lose){
+//         return false;
+//     }
 
-    if(crowns_taken_checked){
-        if(game_results_array[0].crowns_taken != game_tracker_array[0].red_crowns_int){
-            return false;
-        }
-    }
+//     if(crowns_taken_checked){
+//         if(game_results_array[0].crowns_taken != game_tracker_array[0].red_crowns_int){
+//             return false;
+//         }
+//     }
     
-    if(crowns_lost_checked){
-        if(game_results_array[0].crowns_lost != game_tracker_array[0].blue_crowns_int){
-            return false;
-        }
-    }
-    return true;
-}
+//     if(crowns_lost_checked){
+//         if(game_results_array[0].crowns_lost != game_tracker_array[0].blue_crowns_int){
+//             return false;
+//         }
+//     }
+//     return true;
+// }
 //Probably going to delete this code.
 function winning_points_calculator(win_rate, points_bet){
     let win_rate_multiplier = 0.0;

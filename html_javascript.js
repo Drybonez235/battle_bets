@@ -76,7 +76,7 @@ const reset_bet = () => {
     projected_winnings.innerHTML = 0;
 }
 
-const results_builder = () =>{
+const results_builder = () => {
     prediction_win_lose = game_tracker_array[0].win_or_lose;
     prediction_crowns_taken = game_tracker_array[0].red_crowns_int;
     predicion_crowns_lost = game_tracker_array[0].blue_crowns_int;
@@ -92,6 +92,7 @@ const results_builder = () =>{
     const prediction_win_lose_image = prediction_result_builder(prediction_win_lose, results_win_lose);
     const battle_result_html = battle_results_builder(results_crowns_taken, results_crowns_lost);
     const win_lose = bet_analyzer();
+    console.log(win_lose + " bet analzyer return value");
     const math_sign = win_lose ? "+" : "-";
     const points = win_lose ? points_to_win : 0;
     const game_id = '2';
@@ -219,3 +220,46 @@ const battle_results_builder = (results_crowns_taken, results_crowns_lost) => {
     }
     return battle_results_html;
 }
+function bet_analyzer(){
+    win_lose_toggle = game_tracker_array[0].win_or_lose;
+    crowns_taken_checked = game_tracker_array[0].bet_on_crowns_taken;
+    crowns_lost_checked = game_tracker_array[0].bet_on_crowns_lost;
+
+    console.log(crowns_taken_checked);
+    console.log(crowns_lost_checked + "tesrt");
+
+    if(win_lose_toggle != game_results_array[0].win_lose){
+        return false;
+    }
+
+    if(crowns_taken_checked){
+        if(game_results_array[0].crowns_taken != game_tracker_array[0].red_crowns_int){
+            return false;
+        }
+    }
+    
+    if(crowns_lost_checked){
+        if(game_results_array[0].crowns_lost != game_tracker_array[0].blue_crowns_int){
+            return false;
+        }
+    }
+}
+// const bet_analyzer = () => {
+//     win_lose = true;
+//     if(game_tracker_array[0].win_lose != game_results_array[0].win_lose){
+//         win_lose = false;
+//         return win_lose;
+//     }
+
+//     if(game_tracker_array[0].crowns_lost != game_results_array[0].blue_crowns_int){
+//         win_lose = false;
+//         return win_lose;
+//     }
+
+//     if(game_tracker_array[0].crowns_taken != game_results_array[0].red_crowns_int){
+//         win_lose = false;
+//         return win_lose;
+//     }
+
+//     return win_lose;
+// }
