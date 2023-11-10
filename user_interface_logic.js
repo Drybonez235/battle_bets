@@ -19,9 +19,9 @@ let game_results_array = [
 function array_builder(){
     let number = parseInt(document.getElementById("points_bet_1").value);
     let potential_points = parseFloat(document.getElementById("calculated_bet_number").innerHTML);
-    let crowns_taken_checked = document.getElementById("crowns_taken_toggle_1").checked ? 1:0;
-    let crowns_lost_checked = document.getElementById("crowns_lost_toggle_1").checked ? 1:0;
-    let win_lose_toggle = document.getElementById("win_loss_toggle_input_value").checked ? 1:0;
+    let crowns_taken_checked = document.getElementById("crowns_taken_toggle_1").checked ? true : false;
+    let crowns_lost_checked = document.getElementById("crowns_lost_toggle_1").checked ? true : false;
+    let win_lose_toggle = document.getElementById("win_loss_toggle_input_value").checked ? true : false;
     let blue_crowns_int = parseInt(document.getElementById("blue_crowns_checked").value);
     let red_crowns_int = parseInt(document.getElementById("red_crowns_checked").value);
     let box_1 = document.getElementById("place_bet"); 
@@ -48,37 +48,6 @@ function game(player_id_string, win_loss_bool, crowns_take_int, game_time){
     game_array_pusher(game_result);
 }
 
-// function game_array_pusher(game_result){
-//    console.log("game array pusher function"); 
-//     game_tracker_array[0] = game_tracker_array[1];
-//     game_tracker_array[1] = game_tracker_array[2];
-//     game_tracker_array[2] = game_result;
-//     bet_analyzer(); 
-// }
-//
-// function bet_analyzer(){
-//     win_lose_toggle = game_results_array[0].win_or_lose;
-//     crowns_taken_checked = game_results_array[0].bet_on_crowns_taken;
-//     crowns_lost_checked = game_results_array[0].bet_on_crwons_lost;
-
-//     if(win_lose_toggle != game_results_array[0].win_lose){
-//         return false;
-//     }
-
-//     if(crowns_taken_checked){
-//         if(game_results_array[0].crowns_taken != game_tracker_array[0].red_crowns_int){
-//             return false;
-//         }
-//     }
-    
-//     if(crowns_lost_checked){
-//         if(game_results_array[0].crowns_lost != game_tracker_array[0].blue_crowns_int){
-//             return false;
-//         }
-//     }
-//     return true;
-// }
-//Probably going to delete this code.
 function winning_points_calculator(win_rate, points_bet){
     let win_rate_multiplier = 0.0;
     let win_lose = game_tracker_array[2][1] ? 1:0;

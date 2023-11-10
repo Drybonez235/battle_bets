@@ -1,3 +1,5 @@
+let game_number = 1;
+
 const get_values = () =>{
     const win_lose_toggle = document.getElementById("win_loss_toggle_input_value").checked ? 1 : 0;
     const crowns_taken_toggle = document.getElementById("crowns_taken_toggle_1").checked ? 1 : 0;
@@ -94,9 +96,9 @@ const results_builder = () => {
     const win_lose = bet_analyzer();
     console.log(win_lose + " bet analzyer return value");
     const math_sign = win_lose ? "+" : "-";
-    const points = win_lose ? points_to_win : 0;
-    const game_id = '2';
-    console.log(prediction_win_lose_image);
+    const points = win_lose ? points_to_win : prediction_points_bet;
+    const game_id = game_number;
+    console.log(game_id);
     const div_structure = `<div class="inline-block bg-white rounded-3xl ml-2 p-1" id="result_div_structure_${game_id}">
     <div class="" id="result_div_container_${game_id}">
         <div class="border-b-2 " id="result_top_${game_id}">
@@ -133,7 +135,8 @@ const results_builder = () => {
     </div>
 </div>` 
 //document.write(div_structure); 
-document.getElementById("result_div_structure_").insertAdjacentHTML('afterend',div_structure);
+document.getElementById("que_boxes").insertAdjacentHTML('afterend', div_structure);
+game_number += 1;
 }
 
 const crowns_taken_img_builder = (crowns_taken, crowns_taken_predicted) => {
@@ -202,9 +205,9 @@ const prediction_result_builder = (prediction_win_lose, results_win_lose) => {
     const you_win = '<p class="inline-block" id="prediction_results_game_${game_id}">You Won!</p>'
     let prediciton_result_html = "";
     if(prediction_win_lose == results_win_lose){
-        prediciton_result_html = prediciton_result_html.concat(you_win + thumbs_up);
+        prediciton_result_html = prediciton_result_html.concat(thumbs_up + you_win);
     }else{
-        prediciton_result_html = prediciton_result_html.concat(you_lose + thumbs_down);
+        prediciton_result_html = prediciton_result_html.concat(thumbs_down + you_lose);
     }
     return prediciton_result_html;
 }
@@ -233,16 +236,19 @@ function bet_analyzer(){
     }
 
     if(crowns_taken_checked){
+        console.log("Crowns taken triggered")
         if(game_results_array[0].crowns_taken != game_tracker_array[0].red_crowns_int){
             return false;
         }
     }
     
     if(crowns_lost_checked){
+        console.log("Crowns lost triggered")
         if(game_results_array[0].crowns_lost != game_tracker_array[0].blue_crowns_int){
             return false;
         }
     }
+    return true;
 }
 // const bet_analyzer = () => {
 //     win_lose = true;
