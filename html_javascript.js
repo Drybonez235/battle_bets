@@ -7,12 +7,6 @@ const get_values = () =>{
     const crowns_lost_toggle = document.getElementById("crowns_lost_toggle_1").checked ? 1 : 0;
     const crowns_lost_value = 0;
     const bet_amount = document.getElementById("points_bet_1").value;
-
-    console.log(win_lose_toggle);
-    console.log(crowns_taken_toggle);
-   console.log(crowns_taken_value);
-    console.log(crowns_lost_toggle);
-    console.log(bet_amount);
 }
 
 const add_crown = (tag_id, win_lose) => {
@@ -88,17 +82,15 @@ const results_builder = () => {
     results_crowns_taken = game_results_array[0].crowns_taken;
     results_crowns_lost = game_results_array[0].crowns_lost;
     points_to_win = game_tracker_array[0].potential_points;
+    const win_lose = bet_analyzer();
     
     const crowns_taken_images = crowns_taken_img_builder(results_crowns_taken, prediction_crowns_taken);
     const crowns_lost_images = crowns_lost_img_builder(results_crowns_lost, predicion_crowns_lost); 
-    const prediction_win_lose_image = prediction_result_builder(prediction_win_lose, results_win_lose);
+    const prediction_win_lose_image = prediction_result_builder(win_lose);
     const battle_result_html = battle_results_builder(results_crowns_taken, results_crowns_lost);
-    const win_lose = bet_analyzer();
-    console.log(win_lose + " bet analzyer return value");
     const math_sign = win_lose ? "+" : "-";
     const points = win_lose ? points_to_win : prediction_points_bet;
     const game_id = game_number;
-    console.log(game_id);
     const div_structure = `<div class="inline-block bg-white rounded-3xl ml-2 p-1" id="result_div_structure_${game_id}">
     <div class="" id="result_div_container_${game_id}">
         <div class="border-b-2 " id="result_top_${game_id}">
@@ -198,13 +190,13 @@ const crowns_lost_img_builder = (crowns_lost, crowns_lost_predicted) => {
     return crowns_lost_img;
 }
 
-const prediction_result_builder = (prediction_win_lose, results_win_lose) => {
+const prediction_result_builder = (prediction_win_lose) => {
     const thumbs_up = '<img class="object-contain h-10 inline" src="images/emote_king_thumbs_up.png">';
     const thumbs_down = '<img class="object-contain h-10 inline" src="images/emote_king_cry.png">';
     const you_lose = '<p class="inline-block" id="prediction_results_game_${game_id}">You Lost.</p>'
     const you_win = '<p class="inline-block" id="prediction_results_game_${game_id}">You Won!</p>'
     let prediciton_result_html = "";
-    if(prediction_win_lose == results_win_lose){
+    if(prediction_win_lose){
         prediciton_result_html = prediciton_result_html.concat(thumbs_up + you_win);
     }else{
         prediciton_result_html = prediciton_result_html.concat(thumbs_down + you_lose);
@@ -223,49 +215,26 @@ const battle_results_builder = (results_crowns_taken, results_crowns_lost) => {
     }
     return battle_results_html;
 }
+
 function bet_analyzer(){
     win_lose_toggle = game_tracker_array[0].win_or_lose;
     crowns_taken_checked = game_tracker_array[0].bet_on_crowns_taken;
     crowns_lost_checked = game_tracker_array[0].bet_on_crowns_lost;
-
-    console.log(crowns_taken_checked);
-    console.log(crowns_lost_checked + "tesrt");
 
     if(win_lose_toggle != game_results_array[0].win_lose){
         return false;
     }
 
     if(crowns_taken_checked){
-        console.log("Crowns taken triggered")
         if(game_results_array[0].crowns_taken != game_tracker_array[0].red_crowns_int){
             return false;
         }
     }
     
     if(crowns_lost_checked){
-        console.log("Crowns lost triggered")
         if(game_results_array[0].crowns_lost != game_tracker_array[0].blue_crowns_int){
             return false;
         }
     }
     return true;
 }
-// const bet_analyzer = () => {
-//     win_lose = true;
-//     if(game_tracker_array[0].win_lose != game_results_array[0].win_lose){
-//         win_lose = false;
-//         return win_lose;
-//     }
-
-//     if(game_tracker_array[0].crowns_lost != game_results_array[0].blue_crowns_int){
-//         win_lose = false;
-//         return win_lose;
-//     }
-
-//     if(game_tracker_array[0].crowns_taken != game_results_array[0].red_crowns_int){
-//         win_lose = false;
-//         return win_lose;
-//     }
-
-//     return win_lose;
-// }

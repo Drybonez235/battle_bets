@@ -1,20 +1,11 @@
 let game_tracker_array = [];// Id doesn't need empty games.. It just needs to look that way.
 let game_results_array = [
     {
-    "win_lose" : 1,
+    "win_lose" : true,
     "crowns_taken" : 3,
     "crowns_lost" : 1,
     "opponent_name" : "drybonez"
 }];
-
-//game results data.... 
-//Oponent Name: name
-//Win_Lose : 0 or 1
-//Crowns Taken 0-3
-//Crowns Lost 0 -3
-
-
-//game("Jonathan", 1, 2, "10")
 
 function array_builder(){
     let number = parseInt(document.getElementById("points_bet_1").value);
@@ -39,7 +30,6 @@ function array_builder(){
 } 
 
 function game(player_id_string, win_loss_bool, crowns_take_int, game_time){
-    console.log("Game Function");
     let game_result = [
         player_id_string,
         win_loss_bool,
@@ -58,8 +48,6 @@ function winning_points_calculator(win_rate, points_bet){
         win_rate_multiplier = 1 + win_rate;
     }
     let parlay_multiplier = game_tracker_array[3].length;
-    console.log(win_rate_multiplier + " " + parlay_multiplier )
-    console.log((win_rate_multiplier * points_bet) * parlay_multiplier);
     return win_rate_multiplier * points_bet * parlay_multiplier;
 }
 
