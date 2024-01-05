@@ -69,19 +69,19 @@ function read_record() {
 db.close();
 }
 
-function read_top_ten(session_id, streamer_id){
+async function read_top_ten(session_id, streamer_id){
     const db = createDbConnection();
     return_value = [];
-    value = db.all(`SELECT user_name, total_points FROM leaderboard WHERE session_id = $session_id_ AND streamer_id = $streamer_id_ ORDER BY total_points DESC LIMIT 10;
+     value = await db.all(`SELECT user_name, total_points FROM leaderboard WHERE session_id = $session_id_ AND streamer_id = $streamer_id_ ORDER BY total_points DESC LIMIT 10;
     `,{
         $session_id_ : session_id,
         $streamer_id_ : streamer_id
     }, function(err, table){
         for(i=0;i < 10; i++){
-            return_value.push(table[i])
+            return_value.push(table[i]);
+            //console.log(table[i]);
         }
-        console.log(return_value);
-        return return_value;
+        //console.log(return_value);
     })
     db.close();
 }

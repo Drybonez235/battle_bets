@@ -24,12 +24,11 @@ const read_row_express =  ()=> {
 
 const read_top_ten_express = (req, res, next)=> {
     data = database.read_top_ten("Sessions_number2", "Streamer_ID");
-    //console.log(data);
-    //next()
+    
 }
 
 const print_data = (req, res, next)=> {
-    //console.log(data);
+    console.log(data);
 }
 
 // app.listen(port, () => {
