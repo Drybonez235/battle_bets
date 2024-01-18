@@ -2,46 +2,21 @@
 const express = require('express');
 const database = require('./sqlite3_helper.js');
 const app = express();
-const port = 8088
+const port = 8080
 
-//app.get('/', (req, res, next) => {
-//    res.send('Hello World!');
-//})
+const return_top_ten = express.Router();
 
-const add_row_express = () => {
+//works :)
+app.get('/', async (req, res, next) => {
+    const row = await database.read_record("Test_1", 'ox_test', '1');
+    res.send(row);
+    next()
+})
 
-    database.add_row('Drybonez', 500, "Streamer_ID", "Sessions_number2");
-    database.add_row('Lydia', 250, "Streamer_ID", "Sessions_number2");
-    database.add_row('Stephen', 10000,"Streamer_ID", "Sessions_number2");
-    database.add_row('Joshua', 3000, "Streamer_ID", "Sessions_number2");
 
-}
-const read_row_express =  ()=> {
-    database.read_record();
-    
-}
 
-function read_top_ten_express() {
-    const data = database.read_top_ten("Sessions_number2", "Streamer_ID");
-    console.log(data);
-}
+app.listen(port, () => {
+    console.log('Listening on port ${port}')
+})
 
-const print_data = (req, res, next)=> {
-    console.log(data);
-}
-
-// app.listen(port, () => {
-//     console.log('Listening on port $port', {port})
-//     //database.read_record(db)
-// })
-//app.use(db = database.createDbConnection())
-//app.use(add_row_express);
-// app.use(read_top_ten_express)
-// app.use(print_data)
-//app.use(read_row_express)
-
-//add_row_express();
-//read_row_express();
-read_top_ten_express();
-//print_data();
 
