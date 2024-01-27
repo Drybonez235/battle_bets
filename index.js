@@ -20,26 +20,27 @@ app.get('/', (req, res, next) => {
           next();
         }
 });
-app.use('/', clash_data);
 
-app.get('/', (req, res, next) => {
-  //console.log(req.body.clash_royal_data[0])
-  //res.send(req.body.clash_royal_data[0].arena);//req.body.clash_royal_data);
-  res.send("Maybe this time?")
-})
 
-//works :)
-// return_top_ten.get('/top', async (req, res, next) => {
-//     const row = await database.read_record("Test_1", 'ox_test', '1');
-//     res.send(row);
-//     next()
+// app.get('/', (req, res, next) => {
+  
+//   //res.send(req.body.extracted_data);
+//   next()
 // })
+app.use('/top', clash_data);
+//works :)
+app.get('/top', async (req, res, next) => {
+  const set_session_id = req.body.extracted_data[0].battle_time;
+    const row = await database.check_add_update("Test_1", 'ox_test', set_session_id, 1000);
+    const new_value = await database.read_record("Test_1", "ox_test", set_session_id);
+    res.send(new_value);
+})
 
 //app.use(return_top_ten);
 
 
 app.listen(port, () => {
-    console.log('Listening on port ${port}')
+    console.log('Listening on port 8080')
 })
 
 
