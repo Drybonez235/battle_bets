@@ -39,7 +39,7 @@ const extract_data = (req, response, next) => {
     let battle_bet_data = [];
 
     //Start time is the time the first call is made. Any game before start time will not count.
-    let start_time = 202401183519//req.body.start_time;
+    let start_time = Number(401183519)//req.body.start_time;
     let last_refresh_time = start_time - 500//req.body.last_refresh_time - 500;
 
     //If the last refresh time is 0, that means it is the first call. If it is the first call, I want it to return all data.
@@ -53,13 +53,13 @@ const extract_data = (req, response, next) => {
         let current_record = req.body.clash_royal_data[i];
         let your_crowns = current_record.team[0].crowns;
         let opponent_crowns = current_record.opponent[0].crowns;
-        let battle_time = parseInt(current_record.battleTime.replaceAll("T", "").slice(0, 14));
+        let battle_time = current_record.battleTime.replaceAll("T", "").replaceAll("Z", "").slice(3, 12);
 
         if ((start_time <= battle_time) && (last_refresh_time <= battle_time)) {
             game_data["blue_crowns"] = your_crowns;
             game_data["red_crowns"] = opponent_crowns;
             game_data["battle_time"] = battle_time;
-            battle_bet_data.unshift(game_data);
+            battle_bet_data.push(game_data);
         } else {
             break
         }

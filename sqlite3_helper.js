@@ -54,14 +54,15 @@ function check_add_update(user_name, streamer_id, session_id, total_points){
         }, function (err, rows) {
             if (err != null) {
                 if(rows){
-                    resolve(update_row(user_name, streamer_id, session_id, total_points));
+                    update_row(user_name, streamer_id, session_id, total_points);
                 } else {
-                    resolve(add_row(user_name, streamer_id, session_id, total_points));
+                    add_row(user_name, streamer_id, session_id, total_points);
                 }
             } else {
                 reject(err)
             }
         });
+        resolve()
     });
 }
 
@@ -76,9 +77,9 @@ function update_row(user_name, streamer_id, session_id, total_points){
             $streamer_id_ : streamer_id
         }, function (err) {
             if (err != null) {
-                reject()
+                resolve()
             } else {
-                resolve(err);
+                reject(err);
             }
         });
     });
