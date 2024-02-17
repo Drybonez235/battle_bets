@@ -61,7 +61,7 @@ const extract_data = (req, response, next) => {
             game_data["battle_time"] = battle_time;
             battle_bet_data.push(game_data);
         } else {
-            break
+            break;
         }
     }
     req.body["extracted_data"] = battle_bet_data;

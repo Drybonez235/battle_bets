@@ -7,7 +7,7 @@ function createDbConnection() {
     if(fs.existsSync(filepath)) {
         //console.log("It is there an you are connected!")
         db = new sqlite3.Database(filepath);
-        return db
+        return db;
     } else {
         const db = new sqlite3.Database(filepath, (error) => {
             if (error) {
@@ -15,10 +15,11 @@ function createDbConnection() {
             } 
            //console.log("We created the table...") 
             createTable(db);
+            return;
   });
 }}
 
-function createTable() {
+function createTable(db) {
     db.run(`CREATE TABLE leaderboard (
         ID INTEGER PRIMARY KEY,
         user_name VARCHAR(50),
@@ -27,68 +28,97 @@ function createTable() {
         session_id VARCHAR(20)
         );
         `);
+        return;
 }
 
-function add_row(user_name, streamer_id, session_id, points) {
-    const db = createDbConnection();
-    db.run(`
-    INSERT INTO leaderboard(user_name, total_points, streamer_id, session_id) VALUES($user_name_, $points_, $streamer_id_, $session_id_);    
-    `, {
+function add_row(user_name, streamer_id, session_id, points, db_connection) {
+    //return new Promise((resolve, reject) => { 
+    if(db_connection != null){
+        const db = db_connection; 
+    } else {
+        const db = createDbConnection();
+    }
+    db.run(`INSERT INTO leaderboard (user_name, total_points, streamer_id, session_id) VALUES($user_name_, $points_, $streamer_id_, $session_id_)`
+    , {
         $user_name_ : user_name,
         $points_ : points,
         $streamer_id_ : streamer_id,
         $session_id_ : session_id
+    }, function (err) {
+        if (err != null) {
+            //resolve()
+        } else {
+            //reject(err);
+        }
     })
     db.close();
+   //})
 }
 
-function check_add_update(user_name, streamer_id, session_id, total_points){
+function check_add_update(user_name, streamer_id, session_id, total_points, db_connection){
     return new Promise((resolve, reject) => {
+        // if(db_connection != null){
+        //     const db = db_connection; 
+        // } else {
+        //     const db = createDbConnection();
+        // } 
         const db = createDbConnection();
-        db.all('IF EXISTS (SELECT TOP 1 1 FROM leaderboard WHERE (user_name = $user_name_ AND session_id = $session_id_ AND streamer_id = $streamer_id_);'
-        , {
+        db.all('SELECT * FROM leaderboard WHERE user_name = $user_name_', 
+        {
             $points_ : total_points, 
             $user_name_ : user_name,
             $session_id_ : session_id,
             $streamer_id_ : streamer_id
         }, function (err, rows) {
             if (err != null) {
-                if(rows){
-                    update_row(user_name, streamer_id, session_id, total_points);
+                if(rows != null ){
+                    console.log(rows);
+                    update_row(user_name, streamer_id, session_id, total_points, db);
                 } else {
-                    add_row(user_name, streamer_id, session_id, total_points);
+                    console.log(rows);
+                    console.log("There was no rows... Supposibly");
+                    add_row(user_name, streamer_id, session_id, total_points, db);
                 }
+                resolve();
             } else {
                 reject(err)
             }
         });
-        resolve()
     });
 }
 
-function update_row(user_name, streamer_id, session_id, total_points){
-    return new Promise((resolve, reject) => {
-        const db = createDbConnection();
-        db.run(`UPDATE leaderboard SET total_points = $points_ WHERE (user_name = $user_name_ AND session_id = $session_id_ AND streamer_id = $streamer_id_);`
-        , {
+function update_row(user_name, streamer_id, session_id, total_points, db_connection){
+   //return new Promise((resolve, reject) => {
+        if(db_connection != null){
+            const db = db_connection; 
+        } else {
+            const db = createDbConnection();
+        }
+        db.run(`UPDATE leaderboard SET total_points = $points_ WHERE (user_name = $user_name_ AND session_id = $session_id_ AND streamer_id = $streamer_id_);`,
+        {
             $points_ : total_points, 
             $user_name_ : user_name,
             $session_id_ : session_id,
             $streamer_id_ : streamer_id
         }, function (err) {
             if (err != null) {
-                resolve()
+                //resolve()
             } else {
-                reject(err);
+                //reject(err);
             }
         });
-    });
+        db.close();
+    //});
 }
 
-function read_record(user_name, streamer_id, session_id) {
+function read_record(user_name, streamer_id, session_id, db_connection) {
     return new Promise((resolve, reject) => {
-        const db = createDbConnection();
-       db.all('SELECT user_name, total_points, session_id FROM leaderboard WHERE user_name = $user_name_ AND streamer_id = $streamer_id_ AND session_id = $session_id_; LIMIT 1',
+        if(db_connection != null){
+            const db = db_connection; 
+        } else {
+            const db = createDbConnection();
+        }
+       db.all('SELECT user_name, total_points, session_id FROM leaderboard WHERE user_name = $user_name_ AND streamer_id = $streamer_id_ AND session_id = $session_id_',
        {
         $user_name_ : user_name,
         $session_id_ : session_id,
@@ -99,17 +129,22 @@ function read_record(user_name, streamer_id, session_id) {
             reject(err);
         } else {
             resolve(rows);
+            db.close();
         }
        }) 
     })
 }
 
-function promise_read_top_ten(session_id, streamer_id){
+function promise_read_top_ten(session_id, streamer_id, db_connection){
     return new Promise((resolve, reject) => {
-        const db = createDbConnection();
+        if(db_connection != null){
+            const db = db_connection; 
+        } else {
+            const db = createDbConnection();
+        }
         const return_data = [];
         //This is sql statment
-        db.each(`SELECT user_name, total_points FROM leaderboard WHERE session_id = $session_id_ AND streamer_id = $streamer_id_ ORDER BY total_points DESC LIMIT 10;`,
+        db.each(`SELECT user_name, total_points FROM leaderboard WHERE session_id = $session_id_ AND streamer_id = $streamer_id_ ORDER BY total_points DESC LIMIT 10`,
         //This is the parameters
         {
         $session_id_ : session_id,
@@ -137,11 +172,15 @@ function promise_read_top_ten(session_id, streamer_id){
     //end of function.
 }
 
-function promise_read_top_ten_all(session_id, streamer_id){
+function promise_read_top_ten_all(session_id, streamer_id, db_connection){
     return new Promise((resolve, reject) => {
-        const db = createDbConnection();
+        if(db_connection != null){
+            const db = db_connection; 
+        } else {
+            const db = createDbConnection();
+        }
         //This is sql statment
-        db.all(`SELECT user_name, total_points FROM leaderboard WHERE session_id = $session_id_ AND streamer_id = $streamer_id_ ORDER BY total_points DESC LIMIT 10;`,
+        db.all(`SELECT user_name, total_points FROM leaderboard WHERE session_id = $session_id_ AND streamer_id = $streamer_id_ ORDER BY total_points DESC LIMIT 10`,
         //This is the parameters
         {
         $session_id_ : session_id,
@@ -151,7 +190,7 @@ function promise_read_top_ten_all(session_id, streamer_id){
          (err, rows)=>{
             if(err){
                 reject(err);
-            } else{
+            } else {
             resolve(rows);
             }  
         });
