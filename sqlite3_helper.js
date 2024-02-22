@@ -65,13 +65,13 @@ function check_add_update(user_name, streamer_id, session_id, total_points) {
                     if (err != null) {
                         reject(err);
                     } else {
-                        if (rows[0]["1"] == 1) {
-                            await update_row(user_name, streamer_id, session_id, total_points).then(function(){
-                              resolve()
-                            });
-                        } else {
+                        if (rows.length === 0) {
                             await add_row(user_name, streamer_id, session_id, total_points).then(function(){
-                                resolve();
+                            resolve();
+                        });
+                        } else {
+                            await update_row(user_name, streamer_id, session_id, total_points).then(function(){
+                              resolve();
                             });
                         }
                     }

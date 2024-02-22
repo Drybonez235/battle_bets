@@ -1,8 +1,8 @@
 const database = require('./sqlite3_helper.js');
 
 const first = async () => {
-    await database.check_add_update("lydia", "OX", "2002", 102938);
-    await database.read_record("lydia", "OX", "2002").then(function(value){console.log(value)});
+    await database.check_add_update("lydia", "OX", "1234", 500);
+    await database.read_record("lydia", "OX", "1234").then(function(value){console.log(value)});
 }
 
 first();
