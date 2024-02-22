@@ -47,15 +47,14 @@ function add_row(user_name, streamer_id, session_id, points) {
                 if (err != null) {
                     reject(err)
                 } else {
-                    console.log("We made a row");
                     resolve();
                 }
             })
     });
 }
 
-async function check_add_update(user_name, streamer_id, session_id, total_points) {
-    return new Promise(async (resolve, reject) => {
+function check_add_update(user_name, streamer_id, session_id, total_points) {
+    return new Promise((resolve, reject) => {
         const db = createDbConnection();
             db.all("SELECT 1 FROM leaderboard WHERE user_name = $user_name_ AND session_id = $session_id_ AND streamer_id = $streamer_id_",
                 {
@@ -67,9 +66,13 @@ async function check_add_update(user_name, streamer_id, session_id, total_points
                         reject(err);
                     } else {
                         if (rows[0]["1"] == 1) {
-                            await update_row(user_name, streamer_id, session_id, total_points).then(resolve());
+                            await update_row(user_name, streamer_id, session_id, total_points).then(function(){
+                              resolve()
+                            });
                         } else {
-                            await add_row(user_name, streamer_id, session_id, total_points).then(resolve());
+                            await add_row(user_name, streamer_id, session_id, total_points).then(function(){
+                                resolve();
+                            });
                         }
                     }
                 });
@@ -89,7 +92,6 @@ function update_row(user_name, streamer_id, session_id, total_points) {
                 if (err != null) {
                     reject(err)
                 } else {
-                    console.log("We updated a row");
                     resolve();
                 }
             });
@@ -108,7 +110,6 @@ function read_record(user_name, streamer_id, session_id) {
                 if (err != null) {
                     reject(err);
                 } else {
-                    console.log("We read a row");
                     resolve(rows);
                 }
             })
