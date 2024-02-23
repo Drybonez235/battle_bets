@@ -30,10 +30,9 @@ app.get('/', (req, res, next) => {
 app.use('/top', clash_data);
 //works :)
 app.get('/top', async (req, res, next) => {
-  const db = await database.createDbConnection();
   let set_session_id = req.body.extracted_data[0].battle_time;
-    const row = await database.check_add_update("Test_4", 'ox_test', set_session_id, 1000, db);
-    const new_value = await database.read_record("Test_4", "ox_test", set_session_id, db);
+    const row = await database.check_add_update("Test_4", 'ox_test', set_session_id, 1000);
+    const new_value = await database.read_record("Test_4", "ox_test", set_session_id);
     res.send(new_value);
 })
 

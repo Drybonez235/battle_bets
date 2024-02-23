@@ -4,11 +4,12 @@ const sqlite3 = require("sqlite3").verbose();
 const filepath = "./sqlite_db/database.db";
 
 function createDbConnection() {
+    console.log("we are making a connection");
     if (fs.existsSync(filepath)) {
         const db = new sqlite3.Database(filepath);
         return db;
     } else {
-       return console.log("THER IS NO DATABASE");
+        //createTable();
     };
 }
 
@@ -24,10 +25,8 @@ function createTable() {
                 session_id VARCHAR(20));`
             , [], function (err) {
                 if (err != null) {
-                    console.log("error");
                     reject(err);
                 } else {
-                    console.log("No Error and it didn't exist");
                     resolve(db);
                 }
             })
@@ -56,27 +55,27 @@ function add_row(user_name, streamer_id, session_id, points) {
 function check_add_update(user_name, streamer_id, session_id, total_points) {
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
-            db.all("SELECT 1 FROM leaderboard WHERE user_name = $user_name_ AND session_id = $session_id_ AND streamer_id = $streamer_id_",
-                {
-                    $user_name_: user_name,
-                    $session_id_: session_id,
-                    $streamer_id_: streamer_id
-                }, async function (err, rows) {
-                    if (err != null) {
-                        reject(err);
-                    } else {
-                        if (rows.length === 0) {
-                            await add_row(user_name, streamer_id, session_id, total_points).then(function(){
+        db.all("SELECT 1 FROM leaderboard WHERE user_name = $user_name_ AND session_id = $session_id_ AND streamer_id = $streamer_id_",
+            {
+                $user_name_: user_name,
+                $session_id_: session_id,
+                $streamer_id_: streamer_id
+            }, async function (err, rows) {
+                if (err != null) {
+                    reject(err);
+                } else {
+                    if (rows.length === 0) {
+                        await add_row(user_name, streamer_id, session_id, total_points).then(function () {
                             resolve();
                         });
-                        } else {
-                            await update_row(user_name, streamer_id, session_id, total_points).then(function(){
-                              resolve();
-                            });
-                        }
+                    } else {
+                        await update_row(user_name, streamer_id, session_id, total_points).then(function () {
+                            resolve();
+                        });
                     }
-                });
-        });
+                }
+            });
+    });
 }
 
 function update_row(user_name, streamer_id, session_id, total_points) {
@@ -100,7 +99,7 @@ function update_row(user_name, streamer_id, session_id, total_points) {
 
 function read_record(user_name, streamer_id, session_id) {
     return new Promise((resolve, reject) => {
-       const db = createDbConnection();
+        const db = createDbConnection();
         db.all("SELECT user_name, streamer_id, session_id, total_points FROM leaderboard WHERE user_name = $user_name_ AND streamer_id = $streamer_id_ AND session_id = $session_id_"
             , {
                 $user_name_: user_name,
@@ -109,13 +108,29 @@ function read_record(user_name, streamer_id, session_id) {
             }, function (err, rows) {
                 if (err != null) {
                     reject(err);
-                } else {
+                 } else { 
                     resolve(rows);
                 }
             })
     })
 }
 
+function read_top_ten(streamer_id, session_id) {
+    return new Promise((resolve, reject) => {
+        const db = createDbConnection();
+        db.all("SELECT user_name, total_points FROM leaderboard WHERE streamer_id = $streamer_id_ AND session_id = $session_id_ LIMIT 10",
+        {
+            $streamer_id_: streamer_id,
+            $session_id_: session_id
+        }, function (err, rows) {
+            if (err != null) {
+                reject(err);
+            } else {
+                resolve(rows);
+            }
+        })
+    })
+}
 
 module.exports = {
     createDbConnection,
@@ -123,5 +138,6 @@ module.exports = {
     check_add_update,
     add_row,
     update_row,
-    createTable
+    createTable,
+    read_top_ten
 }
