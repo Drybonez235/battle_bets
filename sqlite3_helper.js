@@ -16,18 +16,12 @@ function createDbConnection() {
 function createTable() {
     return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(filepath);
-        db.run(
-            `CREATE TABLE leaderboard (
-                ID INTEGER PRIMARY KEY,
-                user_name VARCHAR(50),
-                total_points INTEGER,
-                streamer_id VARCHAR(12),
-                session_id VARCHAR(20));`
-            , [], function (err) {
+        db.run("CREATE TABLE leaderboard (ID INTEGER PRIMARY KEY, user_name VARCHAR(50), streamer_id VARCHAR(12), session_id INTEGER, total_points INTEGER)"
+            , [] , function (err) {
                 if (err != null) {
                     reject(err);
                 } else {
-                    resolve(db);
+                    resolve();
                 }
             })
     })
