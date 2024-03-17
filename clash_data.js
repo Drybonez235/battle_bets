@@ -39,6 +39,7 @@ const extract_data = (req, response, next) => {
     let battle_bet_data = [];
 
     //Start time is the time the first call is made. Any game before start time will not count.
+    //When we write the javascrip we need to ensure that we send the local
     let start_time = Number(401183519)//req.body.start_time;
     let last_refresh_time = start_time - 500//req.body.last_refresh_time - 500;
 
