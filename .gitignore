@@ -131,3 +131,4 @@ dist
 
 # other files
 .sqlite_db
+.test.js

@@ -14,10 +14,17 @@ const s_t = "20241220T183520.000Z"
 const convert = new Date(Date.UTC(s_t.slice(0,4), s_t.slice(4,6)-1, s_t.slice(6,8), s_t.slice(9,11), s_t.slice(11,13), s_t.slice(13,15)))
 //const sliced2 = new Date(s.charAt(0))
 
-console.log(s);
-console.log(date.valueOf());
-console.log(simple_date);
-console.log(s_t);
-console.log(convert.toISOString())
-console.log(convert.valueOf());
+// console.log(s);
+// console.log(date.valueOf());
+// console.log(simple_date);
+// console.log(s_t);
+// console.log(convert.toISOString())
+// console.log(convert.valueOf());
+// database.add_row_battle_data(convert.valueOf(), "2VL9VP8Y0", "Josua", 3, 0);
 
+async function try_this() {
+    let data = await database.get_new_battle_data(convert.valueOf(), "2VL9VP8Y0").then(function (value) {console.log(value)});
+}
+
+try_this();
+//console.log(database.get_new_battle_data(convert.valueOf(), "2VL9VP8Y0"));
