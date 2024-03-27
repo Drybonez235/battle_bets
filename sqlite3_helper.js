@@ -61,7 +61,7 @@ function add_row_battle_data(battle_time, streamer_id, opponent_name, crowns_tak
 function get_new_battle_data(last_refresh_time, streamer_id){
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
-        db.all("SELECT * FROM battle_data WHERE streamer_id = $streamer_id_ AND battle_time >= $last_refresh_time_ LIMIT 1", 
+        db.all("SELECT * FROM battle_data WHERE streamer_id = $streamer_id_ AND battle_time >= $last_refresh_time_", 
         {
             $last_refresh_time_: last_refresh_time,
             $streamer_id_: streamer_id 
@@ -156,6 +156,22 @@ function read_record(user_name, streamer_id, session_id) {
     })
 }
 
+function read_table(table_name) {
+    return new Promise((resolve, reject) => {
+        const db = createDbConnection();
+        const sql = "SELECT * FROM " + table_name;
+        db.all(sql
+            , [] , function (err, rows) {
+                if (err != null) {
+                    reject(err);
+                 } else {
+                    console.log(rows) 
+                    resolve();
+                }
+            })
+    })
+}
+
 function read_top_ten(streamer_id, session_id) {
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
@@ -183,5 +199,6 @@ module.exports = {
     read_top_ten,
     add_row_battle_data,
     get_new_battle_data,
-    createTable_battle_data
+    createTable_battle_data,
+    read_table
 }
