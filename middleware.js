@@ -20,12 +20,17 @@ const get_top_ten = async (req, res, next) => {
 const get_database_clash_data = async (req, res, next) => {
     const streamer_id = req.body.streamer_id;
     const last_refresh_time = req.body.last_refresh_time;
+    //console.log(streamer_id);
     await database.get_new_battle_data(last_refresh_time, streamer_id).then(function (value){
         if(value === 0){
+            console.log("Did we get here? 3")
+            res.json(value);
             next();
         } else {
-            res.body["new_clash_data"] = value;
-            res.send();
+            console.log(value);
+            console.log("Did we get here? 4")
+            res.json(value);
+            
         }
     })
 }
@@ -44,6 +49,6 @@ const get_new_clash_data = async (req, res, next) => {
     })
 }
 
-router.use("/get_data", [get_top_ten, get_database_clash_data, get_new_clash_data, get_database_clash_data])
+router.use("/", [get_database_clash_data])
 
-module.export = router;
+module.exports = router;

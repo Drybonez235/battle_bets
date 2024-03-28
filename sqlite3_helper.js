@@ -59,17 +59,19 @@ function add_row_battle_data(battle_time, streamer_id, opponent_name, crowns_tak
     })
 }
 function get_new_battle_data(last_refresh_time, streamer_id){
+    console.log(streamer_id + " Here 5");
     return new Promise((resolve, reject) => {
-        const db = createDbConnection();
-        db.all("SELECT * FROM battle_data WHERE streamer_id = $streamer_id_ AND battle_time >= $last_refresh_time_", 
+        //const db = createDbConnection();
+        const db = new sqlite3.Database(filepath);
+        db.all("SELECT * FROM battle_data WHERE streamer_id LIKE '2VL9VP8YO' LIMIT 5", 
         {
-            $last_refresh_time_: last_refresh_time,
-            $streamer_id_: streamer_id 
+            //$last_refresh_time_: last_refresh_time,
+            //$streamer_id_: streamer_id 
         }, function(err, rows) {
             if (err != null){
                 reject(err);
             } else {
-                resolve(rows)
+                resolve(rows);
             }
         })
     })
@@ -77,7 +79,7 @@ function get_new_battle_data(last_refresh_time, streamer_id){
 function add_row(user_name, streamer_id, session_id, points) {
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
-        db.run("INSERT INTO leaderboard (user_name, total_points, streamer_id, session_id) VALUES($user_name_, $points_, $streamer_id_, $session_id_)"
+        db.run("INSERT INTO leaderboard (user_name, total_points, streamer_id, session_id) VALUES($user_name_, $points_, $streamer_id_, $session_id_"
             , {
                 $user_name_: user_name,
                 $points_: points,

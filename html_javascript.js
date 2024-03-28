@@ -1,3 +1,5 @@
+//This file takes the response from the server and changes the interface based on that data.
+
 let game_number = 1;
 
 const get_values = () =>{

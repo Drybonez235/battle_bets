@@ -9,7 +9,7 @@ const convert_now_now = new Date(now.slice(0,4), now.slice(4,6)-1, now.slice(6,8
 const convert_now = new Date(Date.UTC(now.slice(0,4), now.slice(4,6)-1, now.slice(6,8), now.slice(9,11), now.slice(11,13), now.slice(13,15)));
 
 //async function try_this() {
-    let data = await database.get_new_battle_data(convert.valueOf(), "2VL9VP8Y0").then(function (value) {console.log(value)});
+    //let data = await database.get_new_battle_data(convert.valueOf(), "2VL9VP8Y0").then(function (value) {console.log(value)});
 
     // await manage.get_clash_data("2VL9VP8Y0").then(async function (value) {
     //     await manage.add_new_battle_data(value, "2VL9VP8Y0", convert.valueOf())
@@ -17,6 +17,6 @@ const convert_now = new Date(Date.UTC(now.slice(0,4), now.slice(4,6)-1, now.slic
 
 
 //}
-//database.read_table("battle_data");
+database.read_table("battle_data");
 //try_this();
 //console.log(database.get_new_battle_data(convert.valueOf(), "2VL9VP8Y0"));

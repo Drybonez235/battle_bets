@@ -1,3 +1,5 @@
+//This takes input from the buttons and user and makes prepairs the data that is going to be sent to the server.
+
 let game_tracker_array = [];// Id doesn't need empty games.. It just needs to look that way.
 let game_results_array = [
     {
