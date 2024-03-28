@@ -17,6 +17,10 @@ const convert_now = new Date(Date.UTC(now.slice(0,4), now.slice(4,6)-1, now.slic
 
 
 //}
-database.read_table("battle_data");
+// database.add_row("Billy", 11000, "2VL9VP8Y0", 0);
+// database.add_row("Sally", 500, "2VL9VP8Y0", 0);
+// database.add_row("Lydia", 82, "2VL9VP8Y0", 0);
+//database.add_row("test_X", 12345, "2VL9VP8Y0", 1711487328000);
+//database.read_table("leaderboard");
 //try_this();
 //console.log(database.get_new_battle_data(convert.valueOf(), "2VL9VP8Y0"));

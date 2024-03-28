@@ -9,9 +9,10 @@ const get_top_ten = async (req, res, next) => {
     const streamer_id = req.body.streamer_id;
     await database.get_top_ten(streamer_id, session_id).then(function (value) {
         if(value === 0){
+            req.body["top_ten"] = "user_name: no_one, total_points: 0"
             next();
         } else {
-            res.body["top_ten"] = value;
+            req.body["top_ten"] = value;
             next();
         } 
     });
@@ -20,16 +21,12 @@ const get_top_ten = async (req, res, next) => {
 const get_database_clash_data = async (req, res, next) => {
     const streamer_id = req.body.streamer_id;
     const last_refresh_time = req.body.last_refresh_time;
-    //console.log(streamer_id);
     await database.get_new_battle_data(last_refresh_time, streamer_id).then(function (value){
         if(value === 0){
-            console.log("Did we get here? 3")
-            res.json(value);
             next();
         } else {
-            console.log(value);
-            console.log("Did we get here? 4")
-            res.json(value);
+            req.body["clash_royal_data"] = value;
+            res.json(req.body);
             
         }
     })
@@ -49,6 +46,6 @@ const get_new_clash_data = async (req, res, next) => {
     })
 }
 
-router.use("/", [get_database_clash_data])
+router.use("/", [get_top_ten, get_database_clash_data])
 
 module.exports = router;

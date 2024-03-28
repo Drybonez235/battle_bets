@@ -59,14 +59,12 @@ function add_row_battle_data(battle_time, streamer_id, opponent_name, crowns_tak
     })
 }
 function get_new_battle_data(last_refresh_time, streamer_id){
-    console.log(streamer_id + " Here 5");
     return new Promise((resolve, reject) => {
-        //const db = createDbConnection();
-        const db = new sqlite3.Database(filepath);
-        db.all("SELECT * FROM battle_data WHERE streamer_id LIKE '2VL9VP8YO' LIMIT 5", 
+        const db = createDbConnection();
+        db.all("SELECT * FROM battle_data WHERE streamer_id = $streamer_id_ AND battle_time >= $last_refresh_time_ ORDER BY battle_time DESC", 
         {
-            //$last_refresh_time_: last_refresh_time,
-            //$streamer_id_: streamer_id 
+            $last_refresh_time_: last_refresh_time,
+            $streamer_id_: streamer_id 
         }, function(err, rows) {
             if (err != null){
                 reject(err);
@@ -76,13 +74,13 @@ function get_new_battle_data(last_refresh_time, streamer_id){
         })
     })
 }
-function add_row(user_name, streamer_id, session_id, points) {
+function add_row(user_name, total_points, streamer_id, session_id) {
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
-        db.run("INSERT INTO leaderboard (user_name, total_points, streamer_id, session_id) VALUES($user_name_, $points_, $streamer_id_, $session_id_"
+        db.run("INSERT INTO leaderboard (user_name, total_points, streamer_id, session_id) VALUES($user_name_, $total_points_, $streamer_id_, $session_id_)"
             , {
                 $user_name_: user_name,
-                $points_: points,
+                $total_points_: total_points,
                 $streamer_id_: streamer_id,
                 $session_id_: session_id
             }, function (err) {
@@ -174,10 +172,10 @@ function read_table(table_name) {
     })
 }
 
-function read_top_ten(streamer_id, session_id) {
+function get_top_ten(streamer_id, session_id) {
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
-        db.all("SELECT user_name, total_points FROM leaderboard WHERE streamer_id = $streamer_id_ AND session_id = $session_id_ LIMIT 10",
+        db.all("SELECT user_name, total_points FROM leaderboard WHERE (streamer_id = $streamer_id_ AND (session_id <= $session_id_ + 28800000 OR session_id >= $session_id_ - 28800000)) LIMIT 10",
         {
             $streamer_id_: streamer_id,
             $session_id_: session_id
@@ -198,7 +196,7 @@ module.exports = {
     add_row,
     update_row,
     createTable_leaderboard,
-    read_top_ten,
+    get_top_ten,
     add_row_battle_data,
     get_new_battle_data,
     createTable_battle_data,
