@@ -1,5 +1,5 @@
-const database = require('./sqlite3_helper.js');
-const manage = require("./manage_clash_data.js");
+const database = require('../sqlite3_helper.js');
+const manage = require("../manage_clash_data.js");
 
 const now = "20240327T092020.000Z";
 const simple_date = new Date(Date.UTC(2024, 12-1, 20, 18, 35, 20))
