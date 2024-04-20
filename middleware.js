@@ -27,7 +27,6 @@ const get_database_clash_data = async (req, res, next) => {
         } else {
             req.body["clash_royal_data"] = value;
             res.json(req.body);
-            
         }
     })
 }
@@ -38,7 +37,7 @@ const get_new_clash_data = async (req, res, next) => {
     await manage.get_clash_data(streamer_id).then(async function (value) {
         await manage.add_new_battle_data(value, streamer_id, last_refresh_time).then(function (value) {
             if(value.length === 0){
-                res.send();
+                res.json({"maybe": "This should be"});
             } else {
                 next();
             }
@@ -46,6 +45,6 @@ const get_new_clash_data = async (req, res, next) => {
     })
 }
 
-router.use("/", [get_top_ten, get_database_clash_data, get_new_clash_data])
+router.use("/", [get_top_ten, get_database_clash_data, get_new_clash_data, get_database_clash_data])
 
 module.exports = router;
