@@ -32,6 +32,36 @@ function get_clash_data(streamer_id){
     })
 }
 
+function varify_player_id(streamer_id){
+    console.log("varify player Id")
+    return new Promise((resolve, reject) => {
+    let clash_data;
+    const token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImNhNTA1MGUyLTFmZDQtNGFkYy1hYTZhLTY5MTE3OGE5NzU0ZiIsImlhdCI6MTcwNDc3MjgyNywic3ViIjoiZGV2ZWxvcGVyL2IyNzdhNGUwLTcxMjUtNzZlYi0yNmViLTIzMjAwMGQzN2QzYSIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI3My4yMTEuOTAuMjI2Il0sInR5cGUiOiJjbGllbnQifV19.9wNx2GpaMh9lt9a5gqz4zXzaF0EFxVw_Sou5IKWbNrJNKqPOJRfslkwq6HHGDFJDXvklFCVbgwuSD12WlJk09Q";
+    const api_url_begin = "api.clashroyale.com";
+    const api_url_end = "/v1/players/%23" + streamer_id; //Change this back to req.body.player_id
+    const options = {
+        hostname: api_url_begin,
+        path: api_url_end,
+        method: 'GET',
+        headers: {
+            Authorization: token,
+            ContentType: 'application/json'
+        }
+    };
+    https.get(options, res => {
+        let data = "";
+        res.on("data", chunk => {
+            data += chunk;
+        });
+        res.on("end", () => {
+            clash_data = JSON.parse(data);
+            resolve(clash_data);
+        });
+    }).on("error", err => {
+            reject(err.message);
+        });
+    })
+}
 //The battle time is the time the battle ended in UTC. This takes the UTC time that clash royal gives and converts it to epoch (miliseconds since 1970)
 function convert_to_epoch(battle_time_string){
     console.log("convert_to_epoch fired");
@@ -68,5 +98,6 @@ async function add_new_battle_data(clash_data, streamer_id, last_refresh_time){
 module.exports = {
     get_clash_data,
     add_new_battle_data,
-    convert_to_epoch
+    convert_to_epoch,
+    varify_player_id
 }

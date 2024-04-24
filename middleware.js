@@ -54,6 +54,20 @@ const get_new_clash_data = async (req, res, next) => {
     })
 }
 
-router.use("/", [get_top_ten, get_database_clash_data, get_new_clash_data, get_database_clash_data])
+const varify_player_id = async (req, res) => {
+    const streamer_id = req.body.streamer_id;
+    let response = await manage.varify_player_id(streamer_id);
+    response.then(function(value){
+        if(value.length == 1){
+            res.sendStatus(204);
+        } else {
+            req["clash_royal_user_name"] = value.name;
+            res.json(req.body);
+        }
+    });
+}
+
+router.use("/main", [get_top_ten, get_database_clash_data, get_new_clash_data, get_database_clash_data]);
+router.use("/verify", varify_player_id);
 
 module.exports = router;
