@@ -3,11 +3,11 @@ const express = require('express');
 // const database = require('./sqlite3_helper.js');
 // const manage = require('./manage_clash_data.js');
 const middleware = require('./middleware.js');
+const verify = require('./verify.js');
 const app = express();
-const port = 8080
+const port = 8080;
 
 app.all('/', (req, res, next) => {
-  console.log("Are we hitting this? 2");
     res.set({'Content-Type' : 'application/json',
     'Access-Control-Allow-Origin' : "*", 
     'Access-Control-Request-Headers': '*',
@@ -24,7 +24,9 @@ app.all('/', (req, res, next) => {
 });
 
 app.use(express.json())
-app.use("/", middleware);
+
+app.use("/main", middleware);
+app.use("/verify", verify);
 
 app.listen(port, () => {
     console.log('Listening on port 8080')

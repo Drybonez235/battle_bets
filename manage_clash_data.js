@@ -74,6 +74,7 @@ async function add_new_battle_data(clash_data, streamer_id, last_refresh_time){
     console.log("add_new_battle_data");
     return new Promise( async (resolve, reject) => {
         //console.log(clash_data);
+        try{
         for(let i=0; i<24; i++){
             let values_added = 0;
             let current_game = clash_data[i];
@@ -92,6 +93,9 @@ async function add_new_battle_data(clash_data, streamer_id, last_refresh_time){
                 return;
             }
         } 
+    } catch {
+        
+    }
     })
 }
 
