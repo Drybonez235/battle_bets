@@ -10,6 +10,9 @@ const get_top_ten = async (req, res, next) => {
     'Access-Control-Request-Headers': '*',
     'Access-Control-Allow-Headers': '*',
     'Access-Control-Allow-Methods': "OPTIONS, POST, GET"});
+    // if (req.method == "OPTIONS") {
+    //     res.sendStatus(200);
+    //     }
     const session_id = parseInt(req.body.session_id);
     const streamer_id = req.body.streamer_id;
     await database.get_top_ten(streamer_id, session_id).then(function (value) {
@@ -26,6 +29,8 @@ const get_top_ten = async (req, res, next) => {
 const get_database_clash_data = async (req, res, next) => {
     const streamer_id = req.body.streamer_id;
     const last_refresh_time = req.body.last_refresh_time;
+    console.log(last_refresh_time);
+    console.log(streamer_id);
     await database.get_new_battle_data(last_refresh_time, streamer_id).then(function (value){
         if(value.length === 0){
             console.log("There was no data from get_database_clash_data")

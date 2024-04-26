@@ -7,7 +7,7 @@ const verify = require('./verify.js');
 const app = express();
 const port = 8080;
 
-app.all('/', (req, res, next) => {
+app.use('/', (req, res, next) => {
     res.set({'Content-Type' : 'application/json',
     'Access-Control-Allow-Origin' : "*", 
     'Access-Control-Request-Headers': '*',
@@ -15,7 +15,7 @@ app.all('/', (req, res, next) => {
     'Access-Control-Allow-Methods': "OPTIONS, POST, GET"});
     
     //This if statment deals with the preflight request and returns 200
-    if ('OPTIONS' === req.method) {
+    if (req.method == "OPTIONS") {
         res.sendStatus(200);
         }
         else {
