@@ -175,7 +175,7 @@ function read_table(table_name) {
 function get_top_ten(streamer_id, session_id) {
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
-        db.all("SELECT user_name, total_points, session_id FROM leaderboard WHERE (streamer_id = $streamer_id_ AND (session_id <= ($session_id_ + 28800000) AND session_id >= ($session_id_ - 28800000))) LIMIT 10",
+        db.all("SELECT user_name, total_points FROM leaderboard WHERE (streamer_id = $streamer_id_ AND (session_id <= ($session_id_ + 28800000) AND session_id >= ($session_id_ - 28800000))) LIMIT 10",
         {
             $streamer_id_: streamer_id,
             $session_id_: session_id
