@@ -10,14 +10,16 @@ const get_top_ten = async (req, res, next) => {
     'Access-Control-Request-Headers': '*',
     'Access-Control-Allow-Headers': '*',
     'Access-Control-Allow-Methods': "OPTIONS, POST, GET"});
-    // if (req.method == "OPTIONS") {
-    //     res.sendStatus(200);
-    //     }
+    
     const session_id = parseInt(req.body.session_id);
     const streamer_id = req.body.streamer_id;
+    const user_name = req.body.user_name;
+    const points = req.body.user_name;
+
+    await database.check_add_update(user_name, streamer_id, session_id, points);
     await database.get_top_ten(streamer_id, session_id).then(function (value) {
         if(value.length === 0){
-            req.body["top_ten"] = {"user_name": "no_one", "total_points": 0};
+            req.body["top_ten"] = [{"user_name": "no_one", "total_points": 0}];
             next();
         } else {
             req.body["top_ten"] = value;
