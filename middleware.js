@@ -14,7 +14,7 @@ const get_top_ten = async (req, res, next) => {
     const session_id = parseInt(req.body.session_id);
     const streamer_id = req.body.streamer_id;
     const user_name = req.body.user_name;
-    const points = req.body.user_name;
+    const points = req.body.total_points;
 
     await database.check_add_update(user_name, streamer_id, session_id, points);
     await database.get_top_ten(streamer_id, session_id).then(function (value) {
