@@ -16,7 +16,7 @@ function createTable_leaderboard() {
     return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(filepath);
         db.run("CREATE TABLE leaderboard (ID INTEGER PRIMARY KEY, user_name VARCHAR(50), streamer_id VARCHAR(12), session_id INTEGER, total_points INTEGER)"
-            , [] , function (err) {
+            , [], function (err) {
                 if (err != null) {
                     reject(err);
                 } else {
@@ -25,53 +25,53 @@ function createTable_leaderboard() {
             })
     })
 }
-function createTable_battle_data(){
-    return new Promise((resolve, reject) =>{
+function createTable_battle_data() {
+    return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(filepath);
         db.run("CREATE TABLE battle_data (battle_time INTEGER, streamer_id VARCHAR(12), opponent_name VARCHAR(20), crowns_taken INTEGER, crowns_lost INTEGER)"
-        , [], function(err){
-            if (err != null) {
-                reject(err);
-            } else{
-                resolve();
-            }
-        })
+            , [], function (err) {
+                if (err != null) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            })
     })
 }
 
-function add_row_battle_data(battle_time, streamer_id, opponent_name, crowns_taken, crowns_lost){
+function add_row_battle_data(battle_time, streamer_id, opponent_name, crowns_taken, crowns_lost) {
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
         db.run("INSERT INTO battle_data (battle_time, streamer_id, opponent_name, crowns_taken, crowns_lost) VALUES($battle_time_, $streamer_id_, $opponent_name_, $crowns_taken_, $crowns_lost_)"
-        , {
-            $battle_time_: battle_time,
-            $streamer_id_: streamer_id,
-            $opponent_name_: opponent_name,
-            $crowns_taken_: crowns_taken,
-            $crowns_lost_: crowns_lost
-        }, function(err) {
-            if (err != null) {
-                reject(err);
-            } else {
-                resolve();
-            }
-        })
+            , {
+                $battle_time_: battle_time,
+                $streamer_id_: streamer_id,
+                $opponent_name_: opponent_name,
+                $crowns_taken_: crowns_taken,
+                $crowns_lost_: crowns_lost
+            }, function (err) {
+                if (err != null) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            })
     })
 }
-function get_new_battle_data(last_refresh_time, streamer_id){
+function get_new_battle_data(last_refresh_time, streamer_id) {
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
-        db.all("SELECT * FROM battle_data WHERE streamer_id = $streamer_id_ AND battle_time >= $last_refresh_time_ ORDER BY battle_time DESC", 
-        {
-            $last_refresh_time_: last_refresh_time,
-            $streamer_id_: streamer_id 
-        }, function(err, rows) {
-            if (err != null){
-                reject(err);
-            } else {
-                resolve(rows);
-            }
-        })
+        db.all("SELECT * FROM battle_data WHERE streamer_id = $streamer_id_ AND battle_time >= $last_refresh_time_ ORDER BY battle_time DESC",
+            {
+                $last_refresh_time_: last_refresh_time,
+                $streamer_id_: streamer_id
+            }, function (err, rows) {
+                if (err != null) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            })
     })
 }
 function add_row(user_name, streamer_id, session_id, total_points) {
@@ -96,7 +96,9 @@ function add_row(user_name, streamer_id, session_id, total_points) {
 
 function check_add_update(user_name, streamer_id, session_id, total_points) {
     console.log(user_name);
+    console.log(streamer_id)
     console.log(session_id);
+    console.log(total_points);
     console.log("Check Add Update")
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
@@ -113,7 +115,7 @@ function check_add_update(user_name, streamer_id, session_id, total_points) {
                     if (rows.length === 0) {
                         console.log("Rows eqaul 0");
                         await add_row(user_name, streamer_id, session_id, total_points).then(function () {
-        
+
                             resolve();
                         });
                     } else {
@@ -129,6 +131,10 @@ function check_add_update(user_name, streamer_id, session_id, total_points) {
 
 function update_row(user_name, streamer_id, session_id, total_points) {
     console.log("Update Row");
+    console.log(user_name);
+    console.log(streamer_id);
+    console.log(session_id);
+    console.log(total_points);
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
         db.run("UPDATE leaderboard SET total_points = $total_points_ WHERE user_name = $user_name_ AND session_id = $session_id_ AND streamer_id = $streamer_id_",
@@ -158,7 +164,7 @@ function read_record(user_name, streamer_id, session_id) {
             }, function (err, rows) {
                 if (err != null) {
                     reject(err);
-                 } else { 
+                } else {
                     resolve(rows);
                 }
             })
@@ -170,11 +176,11 @@ function read_table(table_name) {
         const db = createDbConnection();
         const sql = "SELECT * FROM " + table_name;
         db.all(sql
-            , [] , function (err, rows) {
+            , [], function (err, rows) {
                 if (err != null) {
                     reject(err);
-                 } else {
-                    console.log(rows) 
+                } else {
+                    console.log(rows)
                     resolve();
                 }
             })
@@ -184,17 +190,34 @@ function read_table(table_name) {
 function get_top_ten(streamer_id, session_id) {
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
-        db.all("SELECT user_name, total_points FROM leaderboard WHERE (streamer_id = $streamer_id_ AND (session_id <= ($session_id_ + 28800000) AND session_id >= ($session_id_ - 28800000))) LIMIT 10",
-        {
-            $streamer_id_: streamer_id,
-            $session_id_: session_id
-        }, function (err, rows) {
-            if (err != null) {
-                reject(err);
-            } else {
-                resolve(rows);
-            }
-        })
+        db.all("SELECT user_name, total_points FROM leaderboard WHERE (streamer_id = $streamer_id_ AND (session_id <= ($session_id_ + 28800000) AND session_id >= ($session_id_ - 28800000))) ORDER BY total_points DESC LIMIT 10",
+            {
+                $streamer_id_: streamer_id,
+                $session_id_: session_id
+            }, function (err, rows) {
+                if (err != null) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            })
+    })
+}
+
+function get_all_games(streamer_id, session_id) {
+    return new Promise((resolve, reject) => {
+        const db = createDbConnection();
+        db.all("SELECT crowns_taken, crowns_lost FROM battle_data WHERE (streamer_id = $streamer_id_ AND (battle_time <= ($session_id - 28800000)"
+            , {
+                $streamer_id_: streamer_id,
+                $session_id_: session_id
+            }, function (err, rows) {
+                if (err != null) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            })
     })
 }
 
@@ -209,5 +232,6 @@ module.exports = {
     add_row_battle_data,
     get_new_battle_data,
     createTable_battle_data,
-    read_table
+    read_table,
+    get_all_games
 }
