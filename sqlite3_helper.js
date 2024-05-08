@@ -207,7 +207,7 @@ function get_top_ten(streamer_id, session_id) {
 function get_all_games(streamer_id, session_id) {
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
-        db.all("SELECT crowns_taken, crowns_lost FROM battle_data WHERE (streamer_id = $streamer_id_ AND (battle_time <= ($session_id - 28800000)"
+        db.all("SELECT crowns_taken, crowns_lost FROM battle_data WHERE streamer_id = $streamer_id_ AND (battle_time >= ($session_id_ - 28800000))"
             , {
                 $streamer_id_: streamer_id,
                 $session_id_: session_id

@@ -30,10 +30,12 @@ const varify_player_id = async (req, res, next) => {
 }
 
 const top_ten_win = async (req, res) => {
-    let now = new Date();
-    await database.get_all_games(req.body.streamer_id, now.toISOString).then(function(value){
+    let date = new Date();
+    let UTC_string = date.toISOString();
+    let UTC_milli = Date.UTC(UTC_string.slice(0,4), UTC_string.slice(5,7)-1, UTC_string.slice(8,10), UTC_string.slice(11,13), UTC_string.slice(14,16),UTC_string.slice(17,19), UTC_string.slice(20,23));
+    await database.get_all_games(req.body.streamer_id, UTC_milli).then(function(value){
         if(value.length == 0){
-            req.body["past_battle_results"] = [{"crowns_taken":0, "crowns_lost":0}];
+            req.body["past_battle_results"] = [{"crowns_taken": 0, "crowns_lost":0}];
             res.json(req.body)
         } else {
             req.body["past_battle_results"] = value;
