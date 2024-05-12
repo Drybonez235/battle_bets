@@ -1,6 +1,5 @@
-//This is going to be the database class... 
 const fs = require('fs');
-const sqlite3 = require("sqlite3").verbose();
+const sqlite3 = require("sqlite3");
 const filepath = "./sqlite_db/database.db";
 
 function createDbConnection() {
@@ -8,8 +7,8 @@ function createDbConnection() {
         const db = new sqlite3.Database(filepath);
         return db;
     } else {
-        //createTable();
-    };
+        throw new Error("There is no table. There is no data.");
+    }
 }
 
 function createTable_leaderboard() {
@@ -25,6 +24,7 @@ function createTable_leaderboard() {
             })
     })
 }
+
 function createTable_battle_data() {
     return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(filepath);
@@ -75,7 +75,6 @@ function get_new_battle_data(last_refresh_time, streamer_id) {
     })
 }
 function add_row(user_name, streamer_id, session_id, total_points) {
-    console.log("add_row Fired");
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
         db.run("INSERT INTO leaderboard (user_name, streamer_id, session_id, total_points) VALUES($user_name_, $streamer_id_, $session_id_, $total_points_ )"
@@ -95,11 +94,6 @@ function add_row(user_name, streamer_id, session_id, total_points) {
 }
 
 function check_add_update(user_name, streamer_id, session_id, total_points) {
-    console.log(user_name);
-    console.log(streamer_id)
-    console.log(session_id);
-    console.log(total_points);
-    console.log("Check Add Update")
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
         db.all("SELECT 1 FROM leaderboard WHERE user_name = $user_name_ AND streamer_id = $streamer_id_ AND session_id = $session_id_",
@@ -111,15 +105,12 @@ function check_add_update(user_name, streamer_id, session_id, total_points) {
                 if (err != null) {
                     reject(err);
                 } else {
-                    console.log(rows);
                     if (rows.length === 0) {
-                        console.log("Rows eqaul 0");
                         await add_row(user_name, streamer_id, session_id, total_points).then(function () {
 
                             resolve();
                         });
                     } else {
-                        console.log("Rows have data");
                         await update_row(user_name, streamer_id, session_id, total_points).then(function () {
                             resolve();
                         });
@@ -130,11 +121,6 @@ function check_add_update(user_name, streamer_id, session_id, total_points) {
 }
 
 function update_row(user_name, streamer_id, session_id, total_points) {
-    console.log("Update Row");
-    console.log(user_name);
-    console.log(streamer_id);
-    console.log(session_id);
-    console.log(total_points);
     return new Promise((resolve, reject) => {
         const db = createDbConnection();
         db.run("UPDATE leaderboard SET total_points = $total_points_ WHERE user_name = $user_name_ AND session_id = $session_id_ AND streamer_id = $streamer_id_",
@@ -180,7 +166,6 @@ function read_table(table_name) {
                 if (err != null) {
                     reject(err);
                 } else {
-                    console.log(rows)
                     resolve();
                 }
             })
@@ -233,5 +218,5 @@ module.exports = {
     get_new_battle_data,
     createTable_battle_data,
     read_table,
-    get_all_games
+    get_all_games,
 }

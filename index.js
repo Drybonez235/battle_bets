@@ -1,11 +1,9 @@
-//This is going to be the server :)
 const express = require('express');
-// const database = require('./sqlite3_helper.js');
-// const manage = require('./manage_clash_data.js');
 const middleware = require('./middleware.js');
 const verify = require('./verify.js');
+const database = require('./sqlite3_helper.js');
 const app = express();
-const port = 8080;
+const port = 8081;
 
 app.use('/', (req, res, next) => {
     res.set({'Content-Type' : 'application/json',
@@ -14,7 +12,6 @@ app.use('/', (req, res, next) => {
     'Access-Control-Allow-Headers': '*',
     'Access-Control-Allow-Methods': "OPTIONS, POST, GET"});
     
-    //This if statment deals with the preflight request and returns 200
     if (req.method == "OPTIONS") {
         res.sendStatus(200);
         }
@@ -29,7 +26,8 @@ app.use("/main", middleware);
 app.use("/verify", verify);
 
 app.listen(port, () => {
-    console.log('Listening on port 8080')
+  database.createTable_leaderboard();
+  database.createTable_battle_data();
 })
 
 

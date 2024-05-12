@@ -31,17 +31,12 @@ const get_top_ten = async (req, res, next) => {
 const get_database_clash_data = async (req, res, next) => {
     const streamer_id = req.body.streamer_id;
     const last_refresh_time = req.body.last_refresh_time;
-    console.log(last_refresh_time);
-    console.log(streamer_id);
     await database.get_new_battle_data(last_refresh_time, streamer_id).then(function (value){
         if(value.length === 0){
-            console.log("There was no data from get_database_clash_data")
             next();
         } else {
             req.body["quary_result_count"] = value.length;
             req.body["clash_royal_data"] = value;
-            console.log("This is get database clash data sending")
-            console.log(req.body);
             res.json(req.body);
         }
     })
@@ -50,14 +45,10 @@ const get_database_clash_data = async (req, res, next) => {
 const get_new_clash_data = async (req, res, next) => {
     const streamer_id = req.body.streamer_id;
     const last_refresh_time = req.body.last_refresh_time;
-    console.log(last_refresh_time);
     await manage.get_clash_data(streamer_id).then(async function (value) {
         await manage.add_new_battle_data(value, streamer_id, last_refresh_time).then(function (value) {
-            console.log(value);
             if(value === 0){
                 req.body["quary_result_count"] = 0;
-                console.log("This is get_new_clash_data sending");
-                console.log(req.body);
                 res.json(req.body);
             } else {
                 next();
