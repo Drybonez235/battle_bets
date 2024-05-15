@@ -7,7 +7,7 @@ const port = 8081;
 
 app.use('/', (req, res, next) => {
     res.set({'Content-Type' : 'application/json',
-    'Access-Control-Allow-Origin' : "*", 
+    'Access-Control-Allow-Origin' : 'https://battle-bets-v.vercel.app', 
     'Access-Control-Request-Headers': '*',
     'Access-Control-Allow-Headers': '*',
     'Access-Control-Allow-Methods': "OPTIONS, POST, GET"});
